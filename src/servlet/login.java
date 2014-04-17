@@ -49,6 +49,7 @@ public class login extends HttpServlet {
 				List<String> login = new ArrayList<String>();
 				db.connect();
 				login = db.login(user, password);
+				db.close();
 				if(login.get(0) != "" && login.get(1) != ""){
 					HttpSession session = request.getSession(true);
 					session.setAttribute( "username", login.get(0));

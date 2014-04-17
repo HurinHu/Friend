@@ -26,6 +26,7 @@
       <script src="js/html5shiv.js"></script>
       <script src="js/respond.min.js"></script>
     <![endif]-->
+    <script src="js/coordinator.js"></script>
   </head>
 
   <body>
@@ -71,199 +72,199 @@
 	        	<center><h2>Rule Setting</h2></center>
 				    <div class="form-group">
 				    	<div class="col-sm-3">
-				    		<input type="text" class="form-control" id="attitude" name="attitude" value="Attitude" >
+				    		<input type="text" class="form-control" id="name0" name="attitude" value="Attitude" >
 				    	</div>
 					    <div class="col-sm-2">
-						    <input type="text" class="form-control" id="attitude1" name="attitude1" placeholder="Attitude">
+						    <input type="text" class="form-control" id="percentage0" name="attitude1" placeholder="Attitude">
 						</div>
 						<div class="col-sm-1">
 							<p class="form-control-static">%</p>
 						</div>
 						<div class="col-sm-6">
 							<label>
-								<input type="checkbox" name="attitude2"> Supervisor
+								<input type="checkbox" id="supervisor0" name="attitude2"> Supervisor
 							</label>
 							<label>
-								<input type="checkbox" name="attitude3"> Observer
+								<input type="checkbox" id="observer0" name="attitude3"> Observer
 							</label>
 							<label>
-								<input type="checkbox" name="attitude4"> Examiner
+								<input type="checkbox" id="examiner0" name="attitude4"> Examiner
 							</label>
 						</div>
 					</div>
 					<div class="form-group">
 					    <div class="col-sm-3">
-				    		<input type="text" class="form-control" id="report" name="report" value="Report" >
+				    		<input type="text" class="form-control" id="name1" name="report" value="Report" >
 				    	</div>
 					    <div class="col-sm-2">
-						    <input type="text" class="form-control" id="report1" name="report1" placeholder="Report">
+						    <input type="text" class="form-control" id="percentage1" name="report1" placeholder="Report">
 						</div>
 						<div class="col-sm-1">
 							<p class="form-control-static">%</p>
 						</div>
 						<div class="col-sm-6">
 							<label>
-								<input type="checkbox" name="report2"> Supervisor
+								<input type="checkbox" id="supervisor1" name="report2"> Supervisor
 							</label>
 							<label>
-								<input type="checkbox" name="report3"> Observer
+								<input type="checkbox" id="observer1" name="report3"> Observer
 							</label>
 							<label>
-								<input type="checkbox" name="report4"> Examiner
+								<input type="checkbox" id="examiner1" name="report4"> Examiner
 							</label>
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="col-sm-3">
-				    		<input type="text" class="form-control" id="literature" name="literature" value="Literature" >
+				    		<input type="text" class="form-control" id="name2" name="literature" value="Literature" >
 				    	</div>
 					    <div class="col-sm-2">
-						    <input type="text" class="form-control" id="literature" name="literature1" placeholder="Literature">
+						    <input type="text" class="form-control" id="percentage2" name="literature1" placeholder="Literature">
 						</div>
 						<div class="col-sm-1">
 							<p class="form-control-static">%</p>
 						</div>
 						<div class="col-sm-6">
 							<label>
-								<input type="checkbox" name="literature2"> Supervisor
+								<input type="checkbox" id="supervisor2" name="literature2"> Supervisor
 							</label>
 							<label>
-								<input type="checkbox" name="literature3"> Observer
+								<input type="checkbox" id="observer2" name="literature3"> Observer
 							</label>
 							<label>
-								<input type="checkbox" name="literature4"> Examiner
+								<input type="checkbox" id="examiner2" name="literature4"> Examiner
 							</label>
 						</div>
 					</div>
 					<div class="form-group">
 					    <div class="col-sm-3">
-				    		<input type="text" class="form-control" id="depth" name="depth" value="Depth" >
+				    		<input type="text" class="form-control" id="name3" name="depth" value="Depth" >
 				    	</div>
 					    <div class="col-sm-2">
-						    <input type="text" class="form-control" id="depth" name="depth1" placeholder="Depth">
+						    <input type="text" class="form-control" id="percentage3" name="depth1" placeholder="Depth">
 						</div>
 						<div class="col-sm-1">
 							<p class="form-control-static">%</p>
 						</div>
 						<div class="col-sm-6">
 							<label>
-								<input type="checkbox" name="depth2"> Supervisor
+								<input type="checkbox" id="supervisor3" name="depth2"> Supervisor
 							</label>
 							<label>
-								<input type="checkbox" name="depth3"> Observer
+								<input type="checkbox" id="observer3" name="depth3"> Observer
 							</label>
 							<label>
-								<input type="checkbox" name="depth4"> Examiner
+								<input type="checkbox" id="examiner3" name="depth4"> Examiner
 							</label>
 						</div>
 					</div>
 					<div class="form-group">
 					    <div class="col-sm-3">
-				    		<input type="text" class="form-control" id="writing" name="writing" value="Writing" >
+				    		<input type="text" class="form-control" id="name4" name="writing" value="Writing" >
 				    	</div>
 					    <div class="col-sm-2">
-						    <input type="text" class="form-control" id="writing" name="writing1" placeholder="Writing">
+						    <input type="text" class="form-control" id="percentage4" name="writing1" placeholder="Writing">
 						</div>
 						<div class="col-sm-1">
 							<p class="form-control-static">%</p>
 						</div>
 						<div class="col-sm-6">
 							<label>
-								<input type="checkbox" name="writing2"> Supervisor
+								<input type="checkbox" id="supervisor4" name="writing2"> Supervisor
 							</label>
 							<label>
-								<input type="checkbox" name="writing3"> Observer
+								<input type="checkbox" id="observer4" name="writing3"> Observer
 							</label>
 							<label>
-								<input type="checkbox" name="writing4"> Examiner
+								<input type="checkbox" id="examiner4" name="writing4"> Examiner
 							</label>
 						</div>
 					</div>
 					<div class="form-group">
 					    <div class="col-sm-3">
-				    		<input type="text" class="form-control" id="experiment" name="experiment" value="Experiment" >
+				    		<input type="text" class="form-control" id="name5" name="experiment" value="Experiment" >
 				    	</div>
 					    <div class="col-sm-2">
-						    <input type="text" class="form-control" id="experiment" name="experiment1" placeholder="Experiment">
+						    <input type="text" class="form-control" id="percentage5" name="experiment1" placeholder="Experiment">
 						</div>
 						<div class="col-sm-1">
 							<p class="form-control-static">%</p>
 						</div>
 						<div class="col-sm-6">
 							<label>
-								<input type="checkbox" name="experiment2"> Supervisor
+								<input type="checkbox" id="supervisor5" name="experiment2"> Supervisor
 							</label>
 							<label>
-								<input type="checkbox" name="experiment3"> Observer
+								<input type="checkbox" id="observer5" name="experiment3"> Observer
 							</label>
 							<label>
-								<input type="checkbox" name="experiment4"> Examiner
+								<input type="checkbox" id="examiner5" name="experiment4"> Examiner
 							</label>
 						</div>
 					</div>
 					<div class="form-group">
 					    <div class="col-sm-3">
-				    		<input type="text" class="form-control" id="pre" name="pre" value="Presentation" >
+				    		<input type="text" class="form-control" id="name6" name="pre" value="Presentation" >
 				    	</div>
 					    <div class="col-sm-2">
-						    <input type="text" class="form-control" id="pre1" name="pre1" placeholder="Presentation">
+						    <input type="text" class="form-control" id="percentage6" name="pre1" placeholder="Presentation">
 						</div>
 						<div class="col-sm-1">
 							<p class="form-control-static">%</p>
 						</div>
 						<div class="col-sm-6">
 							<label>
-								<input type="checkbox" name="pre2"> Supervisor
+								<input type="checkbox" id="supervisor6" name="pre2"> Supervisor
 							</label>
 							<label>
-								<input type="checkbox" name="pre3"> Observer
+								<input type="checkbox" id="observer6" name="pre3"> Observer
 							</label>
 							<label>
-								<input type="checkbox" name="pre4"> Examiner
+								<input type="checkbox" id="examiner6" name="pre4"> Examiner
 							</label>
 						</div>
 					</div>
 					<div class="form-group">
 					    <div class="col-sm-3">
-				    		<input type="text" class="form-control" id="qanda" name="qanda" value="Q&A" >
+				    		<input type="text" class="form-control" id="name7" name="qanda" value="Q&A" >
 				    	</div>
 					    <div class="col-sm-2">
-						    <input type="text" class="form-control" id="qanda1" name="qanda1" placeholder="Q&A">
+						    <input type="text" class="form-control" id="percentage7" name="qanda1" placeholder="Q&A">
 						</div>
 						<div class="col-sm-1">
 							<p class="form-control-static">%</p>
 						</div>
 						<div class="col-sm-6">
 							<label>
-								<input type="checkbox" name="qanda2"> Supervisor
+								<input type="checkbox" id="supervisor7" name="qanda2"> Supervisor
 							</label>
 							<label>
-								<input type="checkbox" name="qanda3"> Observer
+								<input type="checkbox" id="observer7" name="qanda3"> Observer
 							</label>
 							<label>
-								<input type="checkbox" name="qanda4"> Examiner
+								<input type="checkbox" id="examiner7" name="qanda4"> Examiner
 							</label>
 						</div>
 					</div>
 					<div class="form-group">
 					    <div class="col-sm-3">
-				    		<input type="text" class="form-control" id="demo" name="demo" value="Demo" >
+				    		<input type="text" class="form-control" id="name8" name="demo" value="Demo" >
 				    	</div>
 					    <div class="col-sm-2">
-						    <input type="text" class="form-control" id="demo1" name="demo1" placeholder="Demo">
+						    <input type="text" class="form-control" id="percentage8" name="demo1" placeholder="Demo">
 						</div>
 						<div class="col-sm-1">
 							<p class="form-control-static">%</p>
 						</div>
 						<div class="col-sm-6">
 							<label>
-								<input type="checkbox" name="demo2"> Supervisor
+								<input type="checkbox" id="supervisor8" name="demo2"> Supervisor
 							</label>
 							<label>
-								<input type="checkbox" name="demo3"> Observer
+								<input type="checkbox" id="observer8" name="demo3"> Observer
 							</label>
 							<label>
-								<input type="checkbox" name="demo4"> Examiner
+								<input type="checkbox" id="examiner8" name="demo4"> Examiner
 							</label>
 						</div>
 					</div>
