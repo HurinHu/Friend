@@ -24,6 +24,10 @@
     <servlet-name>ajax</servlet-name>
     <servlet-class>servlet.Ajax</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>user</servlet-name>
+    <servlet-class>servlet.User</servlet-class>
+  </servlet>
   <servlet-mapping>
     <servlet-name>index</servlet-name>
     <url-pattern>/index</url-pattern>
@@ -43,5 +47,9 @@
   <servlet-mapping>
     <servlet-name>ajax</servlet-name>
     <url-pattern>/ajax</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>user</servlet-name>
+    <url-pattern>/user</url-pattern>
   </servlet-mapping>
 </web-app>

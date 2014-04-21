@@ -53,9 +53,14 @@ $(document).ready(function(){
 		}
 	});
 	
-	$('a#rulesetting').click(function(){
+	$('li#rulesetting').click(function(){
 		$('div#main').empty();
+		$('div#main').hide();
 		$('div#loading').show();
+		$('li#rulesetting').addClass("active");
+		$('li#manage').removeClass("active");
+		$('li#import').removeClass("active");
+		$('li#report').removeClass("active");
 		$.get("ajax",{action:"rulesetting"},function(data){
 			$('div#main').html(data);
 			$.getJSON('assessment', function(json) {
@@ -77,9 +82,38 @@ $(document).ready(function(){
 		            }); 
 				}
 			});
+			$('div#main').show();
 			$('div#loading').hide();
 		});
 	});
+	
+	$('li#manage').click(function(){
+		$('div#main').empty();
+		$('div#main').hide();
+		$('div#loading').show();
+		$('li#manage').addClass("active");
+		$('li#rulesetting').removeClass("active");
+		$('li#import').removeClass("active");
+		$('li#report').removeClass("active");
+		$.get("ajax",{action:"manageuser"},function(data){
+			$('div#main').html(data);
+			var html="";
+			$.getJSON('user', function(json) {
+				if(json!=null){
+					var i=1;
+					$.each(json,function(index,array){ 
+						html=html+"<tr class=\"success\"><td>"+i+"</td><td>"+array['name']+"</td><td>******</td><td>"+array['email']+"</td><td><button type=\"button\" class=\"btn btn-primary btn-xs\">Edit</button>&nbsp;<button type=\"button\" class=\"btn btn-danger btn-xs\">Delete</button></td></tr>";
+						i++;
+		            }); 
+					$('tbody#userlist').html(html);
+				}
+			});
+			$('div#main').show();
+			$('div#loading').hide();
+		});
+	});
+	
+	
 	$('button#submit').click(function(){
 		if((parseInt($('input#percentage0').val())+parseInt($('input#percentage1').val())+parseInt($('input#percentage2').val())+parseInt($('input#percentage3').val())+parseInt($('input#percentage4').val())+parseInt($('input#percentage5').val())+parseInt($('input#percentage6').val())+parseInt($('input#percentage7').val())+parseInt($('input#percentage8').val()))!=100){
 			alert("Please check the percentage first !!!");

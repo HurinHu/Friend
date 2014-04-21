@@ -56,29 +56,27 @@ public class login extends HttpServlet {
 		String status = request.getParameter("status");
 		if(status.equals("login")){
 			Database db = new Database();
+			HttpSession session = request.getSession(true);
 			try {
 				List<String> login = new ArrayList<String>();
 				db.connect();
 				login = db.login(user, password);
 				db.close();
-				if(login.get(0) != "" && login.get(1) != ""){
-					HttpSession session = request.getSession(true);
+				if(!login.get(0).equals("") && !login.get(1).equals("")){
 					session.setAttribute( "username", login.get(0));
 					session.setAttribute("type", login.get(1));
 					String site = new String("index");
 					response.setStatus(response.SC_MOVED_TEMPORARILY);
 			    	response.setHeader("Location", site);
 				}else{
-					PrintWriter out = response.getWriter();
-					out.println("<script>alert('Login Failed !');</script>");
+					session.setAttribute( "errormessage", "Login Failed ! Check your account and password again");
 					String site = new String("index");
 					response.setStatus(response.SC_MOVED_TEMPORARILY);
 			    	response.setHeader("Location", site);
 				}
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
-				PrintWriter out = response.getWriter();
-				out.println("<script>alert('Connection Error ! Login Failed !');</script>");
+				session.setAttribute( "errormessage", "Connection Error ! Login Failed !");
 				e.printStackTrace();
 				String site = new String("index");
 				response.setStatus(response.SC_MOVED_TEMPORARILY);

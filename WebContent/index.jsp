@@ -45,6 +45,7 @@
 	      	<form class="form-signin" role="form" action="login" method="post">
         		<h2 class="form-signin-heading">Please sign in</h2>
         		<br />
+        		<p class="text-danger"><%if(session.getAttribute("errormessage")!=null){out.println(session.getAttribute("errormessage"));}%></p>
         		<div class="row">
         			<div class="col-md-4">
         			<div style="padding-top:5pt;"><font size="4em"><strong>User</strong></font></div>

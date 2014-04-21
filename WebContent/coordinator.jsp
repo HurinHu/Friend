@@ -57,10 +57,10 @@
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
-            <li class="active"><a href="#" id="rulesetting">Rule Setting</a></li>
-            <li><a href="#" id="manage">Manage User</a></li>
-	        <li><a href="#">Import</a></li>
-	        <li><a href="#">Report</a></li>
+            <li class="active"  id="rulesetting"><a href="#">Rule Setting</a></li>
+            <li id="manage"><a href="#">Manage User</a></li>
+	        <li id="import"><a href="#">Import</a></li>
+	        <li id="report"><a href="#">Report</a></li>
           </ul>
         </div>
 

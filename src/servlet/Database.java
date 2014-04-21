@@ -32,8 +32,13 @@ public class Database {
 			preparedStatement.executeQuery("SELECT * FROM `user` WHERE user='"+user+"' and password='"+password+"'");
 			resultSet = preparedStatement.getResultSet();
 			resultSet.next();
-			login.add(0, resultSet.getString("user"));
-			login.add(1, resultSet.getString("type"));
+			if(resultSet.getRow()!=0){
+				login.add(0, resultSet.getString("user"));
+				login.add(1, resultSet.getString("type"));
+			}else{
+				login.add(0, "");
+				login.add(1, "");
+			}
 			return login;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -55,6 +60,28 @@ public class Database {
 				item.setSupervisor(resultSet.getString("supervisor"), resultSet.getInt("id"));
 				item.setObserver(resultSet.getString("observer"), resultSet.getInt("id"));
 				item.setExaminer(resultSet.getString("examiner"), resultSet.getInt("id"));
+				list.add(i, item);
+				i++;
+			}
+			return list;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			throw e;
+		}
+	}
+	
+	public List<UserItem> user() throws Exception{
+		List<UserItem> list = new ArrayList<UserItem>();
+		try {
+			preparedStatement = connect.createStatement();
+			preparedStatement.executeQuery("SELECT * FROM `user` WHERE type='teacher'");
+			resultSet = preparedStatement.getResultSet();
+			int i=0;
+			while(resultSet.next()){
+				UserItem item = new UserItem();
+				item.setName(resultSet.getString("user"));
+				item.setPassword(resultSet.getString("password"));
+				item.setEmail(resultSet.getString("email"));
 				list.add(i, item);
 				i++;
 			}
