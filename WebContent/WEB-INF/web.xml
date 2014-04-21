@@ -16,6 +16,10 @@
     <servlet-name>assessment</servlet-name>
     <servlet-class>servlet.Assessment</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>change</servlet-name>
+    <servlet-class>servlet.changepw</servlet-class>
+  </servlet>
   <servlet-mapping>
     <servlet-name>index</servlet-name>
     <url-pattern>/index</url-pattern>
@@ -28,5 +32,8 @@
     <servlet-name>assessment</servlet-name>
     <url-pattern>/assessment</url-pattern>
   </servlet-mapping>
-
+  <servlet-mapping>
+    <servlet-name>change</servlet-name>
+    <url-pattern>/change</url-pattern>
+  </servlet-mapping>
 </web-app>

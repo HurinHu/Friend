@@ -68,7 +68,7 @@
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">  
         	<br /> 
         	
-	        	<form id="rule" class="form-horizontal container" style="max-width:600px;" role="form" action="rulesetting" method="get">
+	        	<div id="rule" class="form-horizontal container" style="max-width:600px;">
 	        	<center><h2>Rule Setting</h2></center>
 				    <div class="form-group">
 				    	<div class="col-sm-3">
@@ -269,9 +269,9 @@
 						</div>
 					</div>
 					<center>
-						<button type="submit" class="btn btn-primary">Submit</button>
+						<button id="submit" class="btn btn-primary">Submit</button>
 					</center>
-				</form>
+				</div>
          	<div id="loading" style="display:none">
         			<center>
         				<br /><br /><br />

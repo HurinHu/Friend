@@ -68,18 +68,34 @@ public class Database {
 	public boolean checkpw(String usr, String pw) throws Exception{
 		try {
 			preparedStatement = connect.createStatement();
-			preparedStatement.executeQuery("SELECT * FROM `user` WHERE user='"+usr+"");
+			preparedStatement.executeQuery("SELECT * FROM `user` WHERE user='"+usr+"' AND password='"+pw+"'");
 			resultSet = preparedStatement.getResultSet();
-			resultSet.next();
-			if(resultSet.getString("password").equals(pw)){
+			if(resultSet.next()){
 				return true;
+			}else{
+				return false;
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			throw e;
 		}
-		return false;
 	}
+	
+	public boolean changepw(String usr, String pw) throws Exception{
+		try {
+			preparedStatement = connect.createStatement();
+			int result = preparedStatement.executeUpdate("UPDATE `user` SET password='"+pw+"' WHERE user='"+usr+"'");
+			if(result == 1){
+				return true;
+			}else{
+				return false;
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			throw e;
+		}
+	}
+	
 	public void close() {
 		try {
 			if (resultSet != null) {

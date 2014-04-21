@@ -55,10 +55,24 @@ public class changepw extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
-		}
-		
-		
+		}else if(status.contains("change")){
+			String pw = request.getParameter("pw");
+			HttpSession session = request.getSession(true);
+			Database db = new Database();
+			PrintWriter out = response.getWriter();
+			try {
+				db.connect();
+				if(db.changepw(session.getAttribute("username").toString(), pw)){
+					out.println("OK");
+				}else{
+					out.println("ERROR");
+				}
+				db.close();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}	
 	}
 
 }
