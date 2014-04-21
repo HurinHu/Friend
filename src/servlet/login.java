@@ -32,7 +32,18 @@ public class login extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+		String status = request.getParameter("status");
+		if(status.equals("logout")){
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('Logout successfully !');</script>");
+			HttpSession session = request.getSession(true);
+			session.removeAttribute("username");
+			session.removeAttribute("password");
+			session.removeAttribute("status");
+			String site = new String("index");
+			response.setStatus(response.SC_MOVED_TEMPORARILY);
+	    	response.setHeader("Location", site);
+		}
 	}
 
 	/**
@@ -74,16 +85,6 @@ public class login extends HttpServlet {
 		    	response.setHeader("Location", site);
 			}
 			
-		}else{
-			PrintWriter out = response.getWriter();
-			out.println("<script>alert('Login Failed !');</script>");
-			HttpSession session = request.getSession(true);
-			session.removeAttribute("username");
-			session.removeAttribute("password");
-			session.removeAttribute("status");
-			String site = new String("index");
-			response.setStatus(response.SC_MOVED_TEMPORARILY);
-	    	response.setHeader("Location", site);
 		}
 	}
 
