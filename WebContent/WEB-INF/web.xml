@@ -20,6 +20,10 @@
     <servlet-name>change</servlet-name>
     <servlet-class>servlet.changepw</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>ajax</servlet-name>
+    <servlet-class>servlet.Ajax</servlet-class>
+  </servlet>
   <servlet-mapping>
     <servlet-name>index</servlet-name>
     <url-pattern>/index</url-pattern>
@@ -35,5 +39,9 @@
   <servlet-mapping>
     <servlet-name>change</servlet-name>
     <url-pattern>/change</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ajax</servlet-name>
+    <url-pattern>/ajax</url-pattern>
   </servlet-mapping>
 </web-app>

@@ -62,5 +62,48 @@ public class Assessment extends HttpServlet {
 	 */
 	protected void  doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		String[] name = new String[9];
+		String[] percentage = new String[9];
+		String[] supervisor = new String[9];
+		String[] observer = new String[9];
+		String[] examiner = new String[9];
+		PrintWriter out = response.getWriter();
+		int i;
+		for(i=0;i<9;i++){
+			name[i]=request.getParameter("name"+i);
+			percentage[i]=request.getParameter("percentage"+i);
+			supervisor[i]=request.getParameter("supervisor"+i);
+			observer[i]=request.getParameter("observer"+i);
+			examiner[i]=request.getParameter("examiner"+i);
+			if(supervisor[i].equals("false")){
+				supervisor[i]="no";
+			}else if(supervisor[i].equals("true")){
+				supervisor[i]="yes";
+			}
+			if(observer[i].equals("false")){
+				observer[i]="no";
+			}else if(observer[i].equals("true")){
+				observer[i]="yes";
+			}
+			if(examiner[i].equals("false")){
+				examiner[i]="no";
+			}else if(examiner[i].equals("true")){
+				examiner[i]="yes";
+			}
+		}
+		Database db = new Database();
+		try {
+			db.connect();
+			if(db.updaterule(name,percentage,supervisor,observer,examiner)){
+				out.print("OK");
+			}else{
+				out.print("ERROR");
+			}
+			db.close();      
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 }
