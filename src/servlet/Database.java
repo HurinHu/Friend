@@ -79,6 +79,7 @@ public class Database {
 			int i=0;
 			while(resultSet.next()){
 				UserItem item = new UserItem();
+				item.setId(resultSet.getString("id"));
 				item.setName(resultSet.getString("user"));
 				item.setPassword(resultSet.getString("password"));
 				item.setEmail(resultSet.getString("email"));
@@ -131,6 +132,42 @@ public class Database {
 			for(i=0;i<9;i++){
 				preparedStatement.executeUpdate("UPDATE `rule` SET title='"+name[i]+"', percentage='"+percentage[i]+"', supervisor='"+supervisor[i]+"', observer='"+observer[i]+"', examiner='"+examiner[i]+"' WHERE id="+(i+1)+"");
 			}
+			return true;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			throw e;
+		}
+	}
+	
+	public boolean userupdate(String user, String pw, String email, String id) throws Exception {
+		// TODO Auto-generated method stub
+		try {
+			preparedStatement = connect.createStatement();
+			preparedStatement.executeUpdate("UPDATE `user` SET user='"+user+"', password='"+pw+"', email='"+email+"' WHERE id="+id+"");
+			return true;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			throw e;
+		}
+	}
+	
+	public boolean userdelete(String id) throws Exception {
+		// TODO Auto-generated method stub
+		try {
+			preparedStatement = connect.createStatement();
+			preparedStatement.executeUpdate("DELETE FROM `user` WHERE id="+id+"");
+			return true;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			throw e;
+		}
+	}
+	
+	public boolean useradd(String user, String pw, String email) throws Exception {
+		// TODO Auto-generated method stub
+		try {
+			preparedStatement = connect.createStatement();
+			preparedStatement.executeUpdate("INSERT INTO `user` VALUES (null,'"+user+"','"+pw+"','"+email+"','teacher')");
 			return true;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

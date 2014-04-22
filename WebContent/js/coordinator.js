@@ -1,24 +1,5 @@
 $(document).ready(function(){
-	$.getJSON('assessment', function(json) {
-		if(json!=null){
-			var i=0;
-			$.each(json,function(index,array){ 
-				$('#name'+i).val(array['name']);
-				$('#percentage'+i).val(array['percentage']);
-				if(array['supervisor']=="yes"){
-					$('#supervisor'+i).prop('checked', true);
-				}
-				if(array['observer']=="yes"){
-					$('#observer'+i).prop('checked', true);
-				}
-				if(array['examiner']=="yes"){
-					$('#examiner'+i).prop('checked', true);
-				}
-				i++;
-            }); 
-		}
-	});
-
+	
 	$('button#changepw').click(function(){
 		$('div#changeform').hide();
 		$('div#loading1').show();
@@ -35,7 +16,8 @@ $(document).ready(function(){
 				if(data.indexOf("OK")!=-1){
 					$.post("change",{status:"change",pw:$('input#newpw').val()},function(data){
 						if(data==="OK"){
-							$('#close1').trigger('click');
+							alert("Password Update ! ");
+							$('#close').trigger('click');
 							$('#error').hide();
 							$('#mainsearch').show();
 						}else{
@@ -98,14 +80,15 @@ $(document).ready(function(){
 		$.get("ajax",{action:"manageuser"},function(data){
 			$('div#main').html(data);
 			var html="";
-			$.getJSON('user', function(json) {
+			$.getJSON('user?status=get', function(json) {
 				if(json!=null){
 					var i=1;
 					$.each(json,function(index,array){ 
-						html=html+"<tr class=\"success\"><td>"+i+"</td><td>"+array['name']+"</td><td>******</td><td>"+array['email']+"</td><td><button type=\"button\" class=\"btn btn-primary btn-xs\">Edit</button>&nbsp;<button type=\"button\" class=\"btn btn-danger btn-xs\">Delete</button></td></tr>";
+						html=html+"<tr class=\"success\"><td>"+i+"</td><td>"+array['name']+"</td><td>******</td><td>"+array['email']+"</td><td><button type=\"button\" class=\"btn btn-primary btn-xs\" onclick=\"edit('"+array['name']+"','"+array['password']+"','"+array['email']+"','"+array['id']+"')\">Edit</button>&nbsp;<button type=\"button\" class=\"btn btn-danger btn-xs\" onclick=\"del('"+array['id']+"','"+array['name']+"')\">Delete</button></td></tr>";
 						i++;
 		            }); 
 					$('tbody#userlist').html(html);
+					$('table').append("<a data-toggle=\"modal\" href=\"#edituser\" id=\"showedit\" style=\"display:none\"></a>");
 				}
 			});
 			$('div#main').show();
@@ -113,6 +96,20 @@ $(document).ready(function(){
 		});
 	});
 	
+	$('li#import').click(function(){
+		$('div#main').empty();
+		$('div#main').hide();
+		$('div#loading').show();
+		$('li#import').addClass("active");
+		$('li#rulesetting').removeClass("active");
+		$('li#manage').removeClass("active");
+		$('li#report').removeClass("active");
+		$.get("ajax",{action:"import"},function(data){
+			$('div#main').html(data);
+		});
+		$('div#main').show();
+		$('div#loading').hide();
+	});
 	
 	$('button#submit').click(function(){
 		if((parseInt($('input#percentage0').val())+parseInt($('input#percentage1').val())+parseInt($('input#percentage2').val())+parseInt($('input#percentage3').val())+parseInt($('input#percentage4').val())+parseInt($('input#percentage5').val())+parseInt($('input#percentage6').val())+parseInt($('input#percentage7').val())+parseInt($('input#percentage8').val()))!=100){
@@ -135,4 +132,52 @@ $(document).ready(function(){
 			});
 		}
 	});
+	
+	$('button#userupdate').click(function(){
+		$('div#editform').hide();
+		$('div#loading2').show();
+		$.get("user",{status:"update",user:$('input#user').val(),pw:$('input#pw').val(),email:$('input#email').val(),i:$('input#id').val()},function(data){
+			if(data.indexOf("OK")!=-1){
+				alert("Update Successfully !");
+				$('div#editform').show();
+				$('div#loading2').hide();
+				$('#close1').trigger('click');
+				$('li#manage').trigger('click');
+			}else{
+				alert("Internal Error !");
+				$('div#editform').show();
+				$('div#loading2').hide();
+			}
+		});
+	});
+	
+	$('button#useradd').click(function(){
+		if($('input#user1').val()!=""&&$('input#pw1').val()!=""&&$('input#email1').val()!=""){
+			$('div#addform').hide();
+			$('div#loading3').show();
+			$.get("user",{status:"add",user:$('input#user1').val(),pw:$('input#pw1').val(),email:$('input#email1').val()},function(data){
+				if(data.indexOf("OK")!=-1){
+					alert("Add successfully !");
+					$('input#user1').val("");
+					$('input#pw1').val("");
+					$('input#email1').val("");
+					$('div#addform').show();
+					$('div#loading3').hide();
+					$('#close2').trigger('click');
+					$('li#manage').trigger('click');
+				}else{
+					alert("Internal Error !");
+					$('div#addform').show();
+					$('div#loading3').hide();
+				}
+			});
+		}else{
+			alert("Please fill all blank first !");
+		}
+	});
+	
+	$('li#rulesetting').trigger('click');
+	
 });
+
+
