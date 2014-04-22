@@ -194,5 +194,3 @@ $(document).ready(function(){
 	$('li#rulesetting').trigger('click');
 	
 });
-
-

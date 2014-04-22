@@ -26,6 +26,7 @@
       <script src="js/html5shiv.js"></script>
       <script src="js/respond.min.js"></script>
     <![endif]-->
+    <script type="text/javascript" src="js/ajaxfileupload.js"></script>
     <script src="js/coordinator.js"></script>
   </head>
 
@@ -69,7 +70,6 @@
         	<div id="main">
 	        
 			</div>
-			
          	<div id="loading" style="display:none">
         			<center>
         				<br /><br /><br />

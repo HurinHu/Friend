@@ -1,9 +1,7 @@
 package servlet;
 
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -168,6 +166,28 @@ public class Database {
 		try {
 			preparedStatement = connect.createStatement();
 			preparedStatement.executeUpdate("INSERT INTO `user` VALUES (null,'"+user+"','"+pw+"','"+email+"','teacher')");
+			return true;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			throw e;
+		}
+	}
+	
+	public boolean deleteimport() throws Exception{
+		try {
+			preparedStatement = connect.createStatement();
+			preparedStatement.executeUpdate("TRUNCATE TABLE  `info`");
+			return true;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			throw e;
+		}
+	}
+	
+	public boolean insertimport(String num, String id, String name, String tel, String project, String supervisor, String observer, String examiner, String date, String time, String room) throws Exception{
+		try {
+			preparedStatement = connect.createStatement();
+			preparedStatement.executeUpdate("INSERT INTO `info` VALUES ('"+num+"','"+id+"','"+name+"','"+tel+"','"+project+"','"+supervisor+"','"+observer+"','"+examiner+"','"+date+"','"+time+"','"+room+"')");
 			return true;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
