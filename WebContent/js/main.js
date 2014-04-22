@@ -35,4 +35,33 @@ $(document).ready(function(){
 		}
 	});
 	
+	$('li#overview').click(function(){
+		$('div#main').empty();
+		$('div#main').hide();
+		$('div#loading').show();
+		$('li#overview').addClass("active");
+		$('li#studentlist').removeClass("active");
+		$('li#grade').removeClass("active");
+		$.get("ajax",{action:"overview"},function(data){
+			$('div#main').html(data);
+		});
+		$('div#main').show();
+		$('div#loading').hide();
+	});
+	
+	$('li#studentlist').click(function(){
+		$('div#main').empty();
+		$('div#main').hide();
+		$('div#loading').show();
+		$('li#studentlist').addClass("active");
+		$('li#overview').removeClass("active");
+		$('li#grade').removeClass("active");
+		$.get("ajax",{action:"studentlist"},function(data){
+			$('div#main').html(data);
+		});
+		$('div#main').show();
+		$('div#loading').hide();
+	});
+	
+	$('li#overview').trigger('click');
 });

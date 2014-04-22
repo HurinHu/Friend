@@ -26,6 +26,7 @@
       <script src="js/html5shiv.js"></script>
       <script src="js/respond.min.js"></script>
     <![endif]-->
+    <script src="js/main.js"></script>
   </head>
 
   <body>
@@ -56,146 +57,27 @@
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
-            <li class="active"><a href="#">Overview</a></li>
-            <li><a href="#">Student</a></li>
-            <li><a href="#">Grade</a></li>
+            <li class="active" id="overview"><a href="#">Overview</a></li>
+            <li id="studentlist"><a href="#">Student</a></li>
+            <li id="grade"><a href="#">Grade</a></li>
           </ul>
         </div>
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" >
    
-          
+          <br />
+          <div id="main">
 
-          <h2 class="sub-header">FYP Timetable</h2>
-          <div class="table-responsive" id="time">
-            <table class="table table-hover">
-              <thead>
-                <tr>
-                  <th>Time</th>
-                  <th>Mon(12.16)</th>
-                  <th>Tue(12.17)</th>
-                  <th>Wed(12.18)</th>
-                  <th>Thu(12.19)</th>
-                  <th>Fri(12.20)</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>9:00-9:30</td>
-                  <% out.println(request.getAttribute("A1")); %>
-                  <% out.println(request.getAttribute("B1")); %>
-                  <% out.println(request.getAttribute("C1")); %>
-                  <% out.println(request.getAttribute("D1")); %>
-                  <% out.println(request.getAttribute("E1")); %>
-                </tr>
-                <tr>
-                  <td>9:30-10:00</td>
-                  <% out.println(request.getAttribute("A2")); %>
-                  <% out.println(request.getAttribute("B2")); %>
-                  <% out.println(request.getAttribute("C2")); %>
-                  <% out.println(request.getAttribute("D2")); %>
-                  <% out.println(request.getAttribute("E2")); %>
-                </tr>
-                <tr>
-                  <td>10:00-10:30</td>
-                  <% out.println(request.getAttribute("A3")); %>
-                  <% out.println(request.getAttribute("B3")); %>
-                  <% out.println(request.getAttribute("C3")); %>
-                  <% out.println(request.getAttribute("D3")); %>
-                  <% out.println(request.getAttribute("E3")); %>
-                </tr>
-                <tr>
-                  <td>10:30-11:00</td>
-                  <% out.println(request.getAttribute("A4")); %>
-                  <% out.println(request.getAttribute("B4")); %>
-                  <% out.println(request.getAttribute("C4")); %>
-                  <% out.println(request.getAttribute("D4")); %>
-                  <% out.println(request.getAttribute("E4")); %>
-                </tr>
-                <tr>
-                  <td>11:00-11:30</td>
-                  <% out.println(request.getAttribute("A5")); %>
-                  <% out.println(request.getAttribute("B5")); %>
-                  <% out.println(request.getAttribute("C5")); %>
-                  <% out.println(request.getAttribute("D5")); %>
-                  <% out.println(request.getAttribute("E5")); %>
-                </tr>
-                <tr>
-                  <td>11:30-12:00</td>
-                  <% out.println(request.getAttribute("A6")); %>
-                  <% out.println(request.getAttribute("B6")); %>
-                  <% out.println(request.getAttribute("C6")); %>
-                  <% out.println(request.getAttribute("D6")); %>
-                  <% out.println(request.getAttribute("E6")); %>
-                </tr>
-                <tr>
-                  <td>2:00-2:30</td>
-                  <% out.println(request.getAttribute("A7")); %>
-                  <% out.println(request.getAttribute("B7")); %>
-                  <% out.println(request.getAttribute("C7")); %>
-                  <% out.println(request.getAttribute("D7")); %>
-                  <% out.println(request.getAttribute("E7")); %>
-                </tr>
-                <tr>
-                  <td>2:30-3:00</td>
-                  <% out.println(request.getAttribute("A8")); %>
-                  <% out.println(request.getAttribute("B8")); %>
-                  <% out.println(request.getAttribute("C8")); %>
-                  <% out.println(request.getAttribute("D8")); %>
-                  <% out.println(request.getAttribute("E8")); %>
-                </tr>
-                <tr>
-                  <td>3:00-3:30</td>
-                  <% out.println(request.getAttribute("A9")); %>
-                  <% out.println(request.getAttribute("B9")); %>
-                  <% out.println(request.getAttribute("C9")); %>
-                  <% out.println(request.getAttribute("D9")); %>
-                  <% out.println(request.getAttribute("E9")); %>
-                </tr>
-                <tr>
-                  <td>3:30-4:00</td>
-                  <% out.println(request.getAttribute("A10")); %>
-                  <% out.println(request.getAttribute("B10")); %>
-                  <% out.println(request.getAttribute("C10")); %>
-                  <% out.println(request.getAttribute("D10")); %>
-                  <% out.println(request.getAttribute("E10")); %>
-                </tr>
-                <tr>
-                  <td>4:00-4:30</td>
-                  <% out.println(request.getAttribute("A11")); %>
-                  <% out.println(request.getAttribute("B11")); %>
-                  <% out.println(request.getAttribute("C11")); %>
-                  <% out.println(request.getAttribute("D11")); %>
-                  <% out.println(request.getAttribute("E11")); %>
-                </tr>
-                <tr>
-                  <td>4:30-5:00</td>
-                  <% out.println(request.getAttribute("A12")); %>
-                  <% out.println(request.getAttribute("B12")); %>
-                  <% out.println(request.getAttribute("C12")); %>
-                  <% out.println(request.getAttribute("D12")); %>
-                  <% out.println(request.getAttribute("E12")); %>
-                </tr>
-                <tr>
-                  <td>5:00-5:30</td>
-                  <% out.println(request.getAttribute("A13")); %>
-                  <% out.println(request.getAttribute("B13")); %>
-                  <% out.println(request.getAttribute("C13")); %>
-                  <% out.println(request.getAttribute("D13")); %>
-                  <% out.println(request.getAttribute("E13")); %>
-                </tr>
-                <tr>
-                  <td>5:30-6:00</td>
-                  <% out.println(request.getAttribute("A14")); %>
-                  <% out.println(request.getAttribute("B14")); %>
-                  <% out.println(request.getAttribute("C14")); %>
-                  <% out.println(request.getAttribute("D14")); %>
-                  <% out.println(request.getAttribute("E14")); %>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <button type="button" class="btn btn-info pull-right" onclick="printDiv('time')">Print</button>
+          
+       	  </div>
+        <div id="loading" style="display:none">
+        			<center>
+        				<br /><br /><br />
+        				<img src="images/ajax-loader.gif"/>
+        				<br /><br /><br />
+        			</center>
         </div>
+        </div>
+        
       </div>
     </div>
    

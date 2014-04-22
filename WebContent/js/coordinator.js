@@ -111,6 +111,21 @@ $(document).ready(function(){
 		$('div#loading').hide();
 	});
 	
+	$('li#report').click(function(){
+		$('div#main').empty();
+		$('div#main').hide();
+		$('div#loading').show();
+		$('li#report').addClass("active");
+		$('li#rulesetting').removeClass("active");
+		$('li#manage').removeClass("active");
+		$('li#import').removeClass("active");
+		$.get("ajax",{action:"report"},function(data){
+			$('div#main').html(data);
+		});
+		$('div#main').show();
+		$('div#loading').hide();
+	});
+	
 	$('button#submit').click(function(){
 		if((parseInt($('input#percentage0').val())+parseInt($('input#percentage1').val())+parseInt($('input#percentage2').val())+parseInt($('input#percentage3').val())+parseInt($('input#percentage4').val())+parseInt($('input#percentage5').val())+parseInt($('input#percentage6').val())+parseInt($('input#percentage7').val())+parseInt($('input#percentage8').val()))!=100){
 			alert("Please check the percentage first !!!");
