@@ -67,7 +67,6 @@ public class TimeTable extends HttpServlet {
 				db.close();      
 				String jsonString = JSONValue.toJSONString(l);
 				out.println(jsonString);
-				
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

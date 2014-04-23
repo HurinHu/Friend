@@ -220,6 +220,69 @@ public class Database {
 			throw e;
 		}
 	}
+	
+	public List<Student> studentlist(String type, String teacher) throws Exception {
+		// TODO Auto-generated method stub
+		List<Student> list = new ArrayList<Student>();
+		try {
+			preparedStatement = connect.createStatement();
+			preparedStatement.executeQuery("SELECT * FROM `info` WHERE "+type+"='"+teacher+"'");
+			resultSet = preparedStatement.getResultSet();
+			int i=0;
+			while(resultSet.next()){
+				Student item = new Student();
+				item.setNum(resultSet.getInt("num"));
+				item.setId(resultSet.getString("id"));
+				item.setName(resultSet.getString("name"));
+				item.setTel(resultSet.getString("tel"));
+				item.setProject(resultSet.getString("project"));
+				item.setSupervisor(resultSet.getString("supervisor"));
+				item.setObserver(resultSet.getString("observer"));
+				item.setExaminer(resultSet.getString("examiner"));
+				item.setDate(resultSet.getString("date"));
+				item.setTime(resultSet.getString("time"));
+				item.setRoom(resultSet.getString("room"));
+				list.add(i, item);
+				i++;
+			}
+			return list;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			throw e;
+		}
+	}
+	
+	public List<Student> studentdetail(String num) throws Exception {
+		// TODO Auto-generated method stub
+		List<Student> list = new ArrayList<Student>();
+		try {
+			preparedStatement = connect.createStatement();
+			preparedStatement.executeQuery("SELECT * FROM `info` WHERE num='"+num+"'");
+			resultSet = preparedStatement.getResultSet();
+			int i=0;
+			while(resultSet.next()){
+				Student item = new Student();
+				item.setNum(resultSet.getInt("num"));
+				item.setId(resultSet.getString("id"));
+				item.setName(resultSet.getString("name"));
+				item.setTel(resultSet.getString("tel"));
+				item.setProject(resultSet.getString("project"));
+				item.setSupervisor(resultSet.getString("supervisor"));
+				item.setObserver(resultSet.getString("observer"));
+				item.setExaminer(resultSet.getString("examiner"));
+				item.setDate(resultSet.getString("date"));
+				item.setTime(resultSet.getString("time"));
+				item.setRoom(resultSet.getString("room"));
+				list.add(i, item);
+				i++;
+			}
+			return list;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			throw e;
+		}
+	}
+	
 	public void close() {
 		try {
 			if (resultSet != null) {

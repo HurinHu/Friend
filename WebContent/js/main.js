@@ -86,6 +86,35 @@ $(document).ready(function(){
 		$('li#grade').removeClass("active");
 		$.get("ajax",{action:"studentlist"},function(data){
 			$('div#main').html(data);
+			$.getJSON('studentlist',{type:"supervisor",teacher:$('input#user').val()}, function(json) {
+				if(json!=null){
+					var html="";
+					$.each(json,function(index,array){ 
+						html="<tr class=\"success\"><td>"+array['name']+"</td><td><button type=\"button\" class=\"btn btn-primary btn-sm pull-right\" onclick=\"showdetail("+array['num']+")\">Detail</button></td></tr>";
+						$('tbody#Supervision').append(html);
+					});
+				}
+			});
+			$.getJSON('studentlist',{type:"observer",teacher:$('input#user').val()}, function(json) {
+				if(json!=null){
+					var html="";
+					$.each(json,function(index,array){ 
+						html="<tr class=\"success\"><td>"+array['name']+"</td><td><button type=\"button\" class=\"btn btn-primary btn-sm pull-right\" onclick=\"showdetail("+array['num']+")\">Detail</button></td></tr>";
+						$('tbody#Observation').append(html);
+					});
+				}
+			});
+			$.getJSON('studentlist',{type:"examiner",teacher:$('input#user').val()}, function(json) {
+				if(json!=null){
+					var html="";
+					$.each(json,function(index,array){ 
+						html="<tr class=\"success\"><td>"+array['name']+"</td><td><button type=\"button\" class=\"btn btn-primary btn-sm pull-right\" onclick=\"showdetail("+array['num']+")\">Detail</button></td></tr>";
+						$('tbody#Examination').append(html);
+					});
+				}
+			});
+			$('div#main').append("<a data-toggle=\"modal\" href=\"#showdetail\" id=\"showstudent\" style=\"display:none\"></a>");
+			
 		});
 		$('div#main').show();
 		$('div#loading').hide();
@@ -122,5 +151,17 @@ function inner(time){
     }else{
     	return false;
     }
-  
+}
+
+function showdetail(id){
+	$.getJSON('studentlist',{type:"student",num:id}, function(json) {
+		if(json!=null){
+			var html="";
+			$.each(json,function(index,array){ 
+				html="<p class=\"text-primary lead\">Student ID: "+array['id']+"<br />Name: "+array['name']+"<br />Phone: "+array['tel']+"<br />Project: "+array['project']+"<br />Presentation Time: "+array['date']+" "+array['time']+"<br />Supervisor: "+array['supervisor']+"<br />Observer: "+array['observer']+"<br />Examiner: "+array['examiner']+"<br />Room: "+array['room']+"<br /></p>";
+			});
+			$('div#detailmodal').html(html);
+		}
+	});
+	$('a#showstudent').trigger('click');
 }
