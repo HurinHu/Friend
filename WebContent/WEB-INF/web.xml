@@ -40,6 +40,10 @@
     <servlet-name>timetable</servlet-name>
     <servlet-class>servlet.TimeTable</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>studentlist</servlet-name>
+    <servlet-class>servlet.Studentlist</servlet-class>
+  </servlet>
   <servlet-mapping>
     <servlet-name>index</servlet-name>
     <url-pattern>/index</url-pattern>
@@ -71,5 +75,9 @@
   <servlet-mapping>
     <servlet-name>timetable</servlet-name>
     <url-pattern>/timetable</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>studentlist</servlet-name>
+    <url-pattern>/studentlist</url-pattern>
   </servlet-mapping>
 </web-app>
