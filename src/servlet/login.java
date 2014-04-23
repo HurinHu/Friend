@@ -40,6 +40,11 @@ public class login extends HttpServlet {
 			session.removeAttribute("username");
 			session.removeAttribute("password");
 			session.removeAttribute("status");
+			session.removeAttribute("errormessage");
+			String site = new String("index");
+			response.setStatus(response.SC_MOVED_TEMPORARILY);
+	    	response.setHeader("Location", site);
+		}else{
 			String site = new String("index");
 			response.setStatus(response.SC_MOVED_TEMPORARILY);
 	    	response.setHeader("Location", site);
@@ -57,6 +62,7 @@ public class login extends HttpServlet {
 		if(status.equals("login")){
 			Database db = new Database();
 			HttpSession session = request.getSession(true);
+			session.setMaxInactiveInterval(-1);
 			try {
 				List<String> login = new ArrayList<String>();
 				db.connect();

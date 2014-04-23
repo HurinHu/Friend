@@ -31,10 +31,14 @@
   <servlet>
     <servlet-name>import</servlet-name>
     <servlet-class>servlet.Import</servlet-class>
-    <init-param>  
-        <param-name>savePath</param-name>  
-        <param-value>upload</param-value>  
+    <init-param>
+      <param-name>savePath</param-name>
+      <param-value>upload</param-value>
     </init-param>
+  </servlet>
+  <servlet>
+    <servlet-name>timetable</servlet-name>
+    <servlet-class>servlet.TimeTable</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>index</servlet-name>
@@ -63,5 +67,9 @@
   <servlet-mapping>
     <servlet-name>import</servlet-name>
     <url-pattern>/import</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>timetable</servlet-name>
+    <url-pattern>/timetable</url-pattern>
   </servlet-mapping>
 </web-app>

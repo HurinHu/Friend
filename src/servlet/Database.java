@@ -195,6 +195,31 @@ public class Database {
 		}
 	}
 	
+	public List<TimeItem> getTimetable(String teacher) throws Exception{
+		List<TimeItem> list = new ArrayList<TimeItem>();
+		try {
+			preparedStatement = connect.createStatement();
+			preparedStatement.executeQuery("SELECT * FROM `info` WHERE supervisor='"+teacher+"' OR observer='"+teacher+"' OR examiner='"+teacher+"' ORDER BY time,date ASC");
+			resultSet = preparedStatement.getResultSet();
+			int i=0;
+			while(resultSet.next()){
+				TimeItem item = new TimeItem();
+				item.setName(resultSet.getString("name"));
+				item.setSupervisor(resultSet.getString("supervisor"));
+				item.setObserver(resultSet.getString("observer"));
+				item.setExaminer(resultSet.getString("examiner"));
+				item.setDate(resultSet.getString("date"));
+				item.setTime(resultSet.getString("time"));
+				item.setRoom(resultSet.getString("room"));
+				list.add(i, item);
+				i++;
+			}
+			return list;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			throw e;
+		}
+	}
 	public void close() {
 		try {
 			if (resultSet != null) {
