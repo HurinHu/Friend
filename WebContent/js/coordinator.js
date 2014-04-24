@@ -119,6 +119,9 @@ $(document).ready(function(){
 		$('li#rulesetting').removeClass("active");
 		$('li#manage').removeClass("active");
 		$('li#import').removeClass("active");
+		$.get("report",{type:"check"},function(data){
+			
+		});
 		$.get("ajax",{action:"report"},function(data){
 			$('div#main').html(data);
 		});

@@ -384,6 +384,18 @@ public class Database {
 		}
 	}
 	
+	public boolean check() throws Exception {
+		// TODO Auto-generated method stub
+		try {
+			preparedStatement = connect.createStatement();
+			preparedStatement.executeQuery("SELECT * FROM `info`,`grade` ");
+			return true;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			throw e;
+		}
+	}
+	
 	public void close() {
 		try {
 			if (resultSet != null) {
