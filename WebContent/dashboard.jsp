@@ -70,6 +70,7 @@
 
           
        	  </div>
+       	  <a data-toggle="modal" href="#editgrade" id="showedit" style="display:none"></a>
         <div id="loading" style="display:none">
         			<center>
         				<br /><br /><br />
@@ -118,8 +119,27 @@
           			<button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="close">&times;</button>
           			<h2 class="modal-title">Student Detail</h2>
         		</div>
-        		<div class="modal-body" id="changeform">
+        		<div class="modal-body">
         			<div class="form-signin" id="detailmodal">
+       				</div>
+      				<br />
+        		</div>
+       		</div><!-- /.modal-content -->
+    	</div><!-- /.modal-dialog -->
+  	</div><!-- /.modal -->
+  	
+  	<div class="modal fade" id="editgrade" tabindex="-1" role="dialog" aria-labelledby="editgrade" aria-hidden="true">
+    	<div class="modal-dialog">
+      		<div class="modal-content">
+       			<div class="modal-header">
+          			<button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="close">&times;</button>
+          			<h2 class="modal-title">Edit/Grade</h2>
+        		</div>
+        		<div class="modal-body">
+        			<div class="form-signin">
+        				<div id="editmodal"></div>
+       					<br />
+       					<button class="btn btn-lg btn-primary btn-block" id="submitgrade">Edit/Grade</button>
        				</div>
       				<br />
         		</div>

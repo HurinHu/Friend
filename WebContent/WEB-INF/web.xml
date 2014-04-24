@@ -44,6 +44,10 @@
     <servlet-name>studentlist</servlet-name>
     <servlet-class>servlet.Studentlist</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>gradelist</servlet-name>
+    <servlet-class>servlet.Gradelist</servlet-class>
+  </servlet>
   <servlet-mapping>
     <servlet-name>index</servlet-name>
     <url-pattern>/index</url-pattern>
@@ -79,5 +83,9 @@
   <servlet-mapping>
     <servlet-name>studentlist</servlet-name>
     <url-pattern>/studentlist</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>gradelist</servlet-name>
+    <url-pattern>/gradelist</url-pattern>
   </servlet-mapping>
 </web-app>

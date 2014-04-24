@@ -120,8 +120,21 @@ $(document).ready(function(){
 		$('div#loading').hide();
 	});
 	
+	$('li#grade').click(function(){
+		$('div#main').empty();
+		$('div#main').hide();
+		$('div#loading').show();
+		$('li#grade').addClass("active");
+		$('li#overview').removeClass("active");
+		$('li#studentlist').removeClass("active");
+		$.get("ajax",{action:"gradechoose"},function(data){
+			$('div#main').html(data);			
+		});
+		$('div#main').show();
+		$('div#loading').hide();
+	});
+	
 	$('li#overview').trigger('click');
-
 });
 
 function inner(time){
@@ -164,4 +177,24 @@ function showdetail(id){
 		}
 	});
 	$('a#showstudent').trigger('click');
+}
+
+function grade(id){
+	$('div#editmodal').empty();
+	$.getJSON("gradelist",{type:"grade",i:id,type1:$('input#type').val(),teacher:$('input#user').val()}, function(json) {
+		if(json!=null){
+			$.getJSON("gradelist",{type:"authority",teacher:$('input#type').val()}, function(json1) {
+				var html="";
+				if(json1!=null){
+					$.each(json,function(index,array){
+						$.each(json1,function(index,array1){
+							html="<h5 class='text-danger'>"+array1['title']+"</h5><input type=\"text\" id="+array1['title']+" class=\"form-control\" >";
+							$('div#editmodal').append(html);
+						});
+					});
+				}
+			});
+		}
+	});
+	$('a#showedit').trigger('click');
 }

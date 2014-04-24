@@ -1,5 +1,6 @@
 package servlet;
 
+import java.sql.Array;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -176,7 +177,8 @@ public class Database {
 	public boolean deleteimport() throws Exception{
 		try {
 			preparedStatement = connect.createStatement();
-			preparedStatement.executeUpdate("TRUNCATE TABLE  `info`");
+			preparedStatement.executeUpdate("TRUNCATE TABLE `info`");
+			preparedStatement.executeUpdate("TRUNCATE TABLE `grade`");
 			return true;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -188,6 +190,7 @@ public class Database {
 		try {
 			preparedStatement = connect.createStatement();
 			preparedStatement.executeUpdate("INSERT INTO `info` VALUES ('"+num+"','"+id+"','"+name+"','"+tel+"','"+project+"','"+supervisor+"','"+observer+"','"+examiner+"','"+date+"','"+time+"','"+room+"')");
+			preparedStatement.executeUpdate("INSERT INTO `grade` VALUES ('"+num+"', '', '', '', '', '', '', '', '', '', '')");
 			return true;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -273,6 +276,92 @@ public class Database {
 				item.setDate(resultSet.getString("date"));
 				item.setTime(resultSet.getString("time"));
 				item.setRoom(resultSet.getString("room"));
+				list.add(i, item);
+				i++;
+			}
+			return list;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			throw e;
+		}
+	}
+	
+	public List<Grade> gradelist(String type, String teacher) throws Exception {
+		// TODO Auto-generated method stub
+		List<Grade> list = new ArrayList<Grade>();
+		try {
+			preparedStatement = connect.createStatement();
+			preparedStatement.executeQuery("SELECT * FROM `info`,`grade` WHERE "+type+"='"+teacher+"' AND `info`.`num`=`grade`.`num`");
+			resultSet = preparedStatement.getResultSet();
+			int i=0;
+			while(resultSet.next()){
+				Grade item = new Grade();
+				item.setNum(resultSet.getInt("num"));
+				item.setName(resultSet.getString("name"));
+				item.setId1(resultSet.getString("id1"));
+				item.setId2(resultSet.getString("id2"));
+				item.setId3(resultSet.getString("id3"));
+				item.setId4(resultSet.getString("id4"));
+				item.setId5(resultSet.getString("id5"));
+				item.setId6(resultSet.getString("id6"));
+				item.setId7(resultSet.getString("id7"));
+				item.setId8(resultSet.getString("id8"));
+				item.setId9(resultSet.getString("id9"));
+				item.setTotal(resultSet.getString("total"));
+				list.add(i, item);
+				i++;
+			}
+			return list;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			throw e;
+		}
+	}
+	
+	public List<Grade> gradeauthority(String type) throws Exception {
+		// TODO Auto-generated method stub
+		List<Grade> list = new ArrayList<Grade>();
+		try {
+			preparedStatement = connect.createStatement();
+			preparedStatement.executeQuery("SELECT * FROM `rule` WHERE "+type+"='yes'");
+			resultSet = preparedStatement.getResultSet();
+			int i=0;
+			while(resultSet.next()){
+				Grade item = new Grade();
+				item.setNum(resultSet.getInt("id"));
+				item.setTitle(resultSet.getString("title"));
+				list.add(i, item);
+				i++;
+			}
+			return list;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			throw e;
+		}
+	}
+	
+	public List<Grade> getGrade(String id, String teacher, String type) throws Exception {
+		// TODO Auto-generated method stub
+		List<Grade> list = new ArrayList<Grade>();
+		try {
+			preparedStatement = connect.createStatement();
+			preparedStatement.executeQuery("SELECT * FROM `info`,`grade` WHERE "+type+"='"+teacher+"' AND `info`.`num`=`grade`.`num` AND `grade`.`num`="+id+"");
+			resultSet = preparedStatement.getResultSet();
+			int i=0;
+			while(resultSet.next()){
+				Grade item = new Grade();
+				item.setNum(resultSet.getInt("num"));
+				item.setName(resultSet.getString("name"));
+				item.setId1(resultSet.getString("id1"));
+				item.setId2(resultSet.getString("id2"));
+				item.setId3(resultSet.getString("id3"));
+				item.setId4(resultSet.getString("id4"));
+				item.setId5(resultSet.getString("id5"));
+				item.setId6(resultSet.getString("id6"));
+				item.setId7(resultSet.getString("id7"));
+				item.setId8(resultSet.getString("id8"));
+				item.setId9(resultSet.getString("id9"));
+				item.setTotal(resultSet.getString("total"));
 				list.add(i, item);
 				i++;
 			}
