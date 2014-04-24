@@ -137,6 +137,7 @@ $(document).ready(function(){
 	$('button#submitgrade').click(function(){
 		var i;
 		var error=0;
+		var full=0;
 		for(i=0;i<$('input#inputnum').val();i++){
 			var id=$('input#input'+i).val();
 			var value=$('input#'+id).val();
@@ -149,11 +150,53 @@ $(document).ready(function(){
 				var id=$('input#input'+i).val();
 				var value=$('input#'+id).val();
 				var sid=$('input#studentid').val();
+				var ty=$('input#type').val();
+				var name=$('input#user').val();
+				if(value!=""){
+					full++;
+				}
 				$.get("gradelist",{type:"update",s:sid,i:id,v:value},function(data){
 					
 				});
 			}
+			if(full==$('input#inputnum').val()){
+				$.get("gradelist",{type:"finish",s:sid,t:ty},function(data){
+					
+				});
+			}else{
+				$.get("gradelist",{type:"unfinish",s:sid,t:ty,n:name},function(data){
+					
+				});
+			}
 			alert("Update Successfully !");
+			$('tbody#gradelist').empty();
+			$.getJSON("gradelist",{type:ty,teacher:name}, function(json) {
+				if(json!=null){
+					var html="";
+					$.getJSON('gradelist',{type:"authority",teacher:ty}, function(json1) {
+						if(json1!=null){
+							$.each(json,function(index,array){
+								var finish=0;
+								$.each(json1,function(index,array1){
+									if(array[array1['name']]!=""){
+									
+									}else{
+										finish=1;
+									}
+								});
+								if(finish==1){
+									html="<tr><td>"+array['name']+"</td><td><button type='button' class='btn btn-primary btn-xs pull-right' onclick='grade("+array['num']+")'>Grade/Edit</button></td><td></td></tr>";
+									$('tbody#gradelist').append(html);
+								}else{
+									html="<tr class='success'><td>"+array['name']+"</td><td><button type='button' class='btn btn-primary btn-xs pull-right' onclick='grade("+array['num']+")'>Grade/Edit</button></td><td>&radic;</td></tr>";
+									$('tbody#gradelist').append(html);
+								}
+							});
+						}
+					});
+				}
+			});
+			$('#close2').trigger('click');
 		}else{
 			alert("Input Error !");
 		}

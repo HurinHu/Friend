@@ -4,6 +4,7 @@ public class Grade {
 	private int num;
 	private String name;
 	private String title;
+	private String id;
 	private String id1;
 	private String id2;
 	private String id3;
@@ -31,6 +32,15 @@ public class Grade {
 	
 	public String getTitle(){
 		return title;
+	}
+	
+	public boolean setId(String id){
+		this.id = id;
+		return true;
+	}
+	
+	public String getId(){
+		return id;
 	}
 	
 	public boolean setName(String name){

@@ -116,7 +116,7 @@
     	<div class="modal-dialog">
       		<div class="modal-content">
        			<div class="modal-header">
-          			<button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="close">&times;</button>
+          			<button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="close1">&times;</button>
           			<h2 class="modal-title">Student Detail</h2>
         		</div>
         		<div class="modal-body">
@@ -132,7 +132,7 @@
     	<div class="modal-dialog">
       		<div class="modal-content">
        			<div class="modal-header">
-          			<button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="close">&times;</button>
+          			<button type="button" class="close" data-dismiss="modal" aria-hidden="true" id="close2">&times;</button>
           			<h2 class="modal-title">Edit/Grade</h2>
         		</div>
         		<div class="modal-body">

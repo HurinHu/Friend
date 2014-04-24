@@ -120,10 +120,24 @@ $(document).ready(function(){
 		$('li#manage').removeClass("active");
 		$('li#import').removeClass("active");
 		$.get("report",{type:"check"},function(data){
-			
-		});
-		$.get("ajax",{action:"report"},function(data){
-			$('div#main').html(data);
+			if(data.indexOf("OK")==-1){
+				alert("Some teacher doesn't finish, Notification Email have been sent ...");
+			}else{
+				$.get("ajax",{action:"report"},function(data){
+					$('div#main').html(data);
+					$.getJSON("report",{type:"get"},function(json){
+						if(json!=null){
+							var i=1;
+							var html="";
+							$.each(json,function(index,array){ 
+								html="<tr><td>"+i+"</td><td>"+array['id']+"</td><td>"+array['name']+"</td><td>"+array['id1']+"</td><td>"+array['id2']+"</td><td>"+array['id3']+"</td><td>"+array['id4']+"</td><td>"+array['id5']+"</td><td>"+array['id6']+"</td><td>"+array['id7']+"</td><td>"+array['id8']+"</td><td>"+array['id9']+"</td><td>"+array['total']+"</td></tr>";
+								i++;
+								$('tbody#reportlist').append(html);
+							});
+						}
+					});					
+				});
+			}
 		});
 		$('div#main').show();
 		$('div#loading').hide();

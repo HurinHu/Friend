@@ -190,7 +190,7 @@ public class Database {
 		try {
 			preparedStatement = connect.createStatement();
 			preparedStatement.executeUpdate("INSERT INTO `info` VALUES ('"+num+"','"+id+"','"+name+"','"+tel+"','"+project+"','"+supervisor+"','"+observer+"','"+examiner+"','"+date+"','"+time+"','"+room+"')");
-			preparedStatement.executeUpdate("INSERT INTO `grade` VALUES ('"+num+"', '', '', '', '', '', '', '', '', '', '')");
+			preparedStatement.executeUpdate("INSERT INTO `grade` VALUES ('"+num+"','"+supervisor+"','"+observer+"','"+examiner+"', '', '', '', '', '', '', '', '', '', '')");
 			return true;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -291,7 +291,7 @@ public class Database {
 		List<Grade> list = new ArrayList<Grade>();
 		try {
 			preparedStatement = connect.createStatement();
-			preparedStatement.executeQuery("SELECT * FROM `info`,`grade` WHERE "+type+"='"+teacher+"' AND `info`.`num`=`grade`.`num`");
+			preparedStatement.executeQuery("SELECT * FROM `info`,`grade` WHERE `info`."+type+"='"+teacher+"' AND `info`.`num`=`grade`.`num`");
 			resultSet = preparedStatement.getResultSet();
 			int i=0;
 			while(resultSet.next()){
@@ -345,7 +345,7 @@ public class Database {
 		List<Grade> list = new ArrayList<Grade>();
 		try {
 			preparedStatement = connect.createStatement();
-			preparedStatement.executeQuery("SELECT * FROM `info`,`grade` WHERE "+type+"='"+teacher+"' AND `info`.`num`=`grade`.`num` AND `grade`.`num`="+id+"");
+			preparedStatement.executeQuery("SELECT * FROM `info`,`grade` WHERE `info`."+type+"='"+teacher+"' AND `info`.`num`=`grade`.`num` AND `grade`.`num`="+id+"");
 			resultSet = preparedStatement.getResultSet();
 			int i=0;
 			while(resultSet.next()){
@@ -376,7 +376,8 @@ public class Database {
 		// TODO Auto-generated method stub
 		try {
 			preparedStatement = connect.createStatement();
-			preparedStatement.executeUpdate("UPDATE `grade` SET "+id+"='"+value+"' WHERE num="+sid+"");
+			int v = Integer.parseInt(value);
+			preparedStatement.executeUpdate("UPDATE `grade` SET "+id+"='"+v+"' WHERE num="+sid+"");
 			return true;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -387,9 +388,132 @@ public class Database {
 	public boolean check() throws Exception {
 		// TODO Auto-generated method stub
 		try {
+			List<Teacher> list = new ArrayList<Teacher>();
 			preparedStatement = connect.createStatement();
-			preparedStatement.executeQuery("SELECT * FROM `info`,`grade` ");
+			preparedStatement.executeQuery("SELECT DISTINCT supervisor,observer,examiner FROM `grade` WHERE supervisor<>'' OR observer<>'' OR examiner<>''");
+			resultSet = preparedStatement.getResultSet();
+			int i=0;
+			while(resultSet.next()){
+				if(!resultSet.getString("supervisor").equals("")){
+					Teacher item = new Teacher();
+					item.setName(resultSet.getString("supervisor"));
+					list.add(i, item);
+					i++;
+				}
+				if(!resultSet.getString("observer").equals("")){
+					Teacher item = new Teacher();
+					item.setName(resultSet.getString("observer"));
+					list.add(i, item);
+					i++;
+				}
+				if(!resultSet.getString("examiner").equals("")){
+					Teacher item = new Teacher();
+					item.setName(resultSet.getString("examiner"));
+					list.add(i, item);
+					i++;
+				}
+			}
+			List<Teacher> list1 = new ArrayList<Teacher>();
+			int j=0;
+			int k=0;
+			boolean match = false;
+			for(i=0;i<list.size();i++){
+				Teacher item = list.get(i);
+				for(j=0;j<list1.size();j++){
+					Teacher item1 = list1.get(j);
+					if(item.getName().equals(item1.getName())){
+						match = true;
+					}
+				}
+				if(!match){
+					Teacher item2 = new Teacher();
+					item2.setName(item.getName());
+					list1.add(k, item2);
+					k++;
+				}
+				match = false;
+			}
+			Email email = new Email();
+			for(j=0;j<list1.size();j++){
+				Teacher item = list1.get(j);
+				preparedStatement = connect.createStatement();
+				preparedStatement.executeQuery("SELECT email FROM `user` WHERE `user`.user="+item.getName()+"");
+				resultSet = preparedStatement.getResultSet();
+				while(resultSet.next()){
+					email.send(resultSet.getString("observer"));
+				}
+			}
+			if(list1.size()!=0){
+				return false;
+			}else{
+				return true;
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			throw e;
+		}
+	}
+	
+	public boolean finish(String sid, String t) throws Exception {
+		// TODO Auto-generated method stub
+		try {
+			preparedStatement = connect.createStatement();
+			preparedStatement.executeUpdate("UPDATE `grade` SET "+t+"='' WHERE num="+sid+"");
 			return true;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			throw e;
+		}
+	}
+	
+	public boolean unfinish(String sid, String t, String name) throws Exception {
+		// TODO Auto-generated method stub
+		try {
+			preparedStatement = connect.createStatement();
+			preparedStatement.executeUpdate("UPDATE `grade` SET "+t+"='"+name+"' WHERE num="+sid+"");
+			return true;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			throw e;
+		}
+	}
+	
+	public List<Grade> getReport() throws Exception {
+		// TODO Auto-generated method stub
+		List<Grade> list = new ArrayList<Grade>();
+		try {
+			preparedStatement = connect.createStatement();
+			preparedStatement.executeQuery("SELECT percentage FROM `rule` ORDER BY id ASC");
+			resultSet = preparedStatement.getResultSet();
+			int[] percentage = new int[9];
+			int j=0;
+			while(resultSet.next()){
+				percentage[j++] = resultSet.getInt("percentage");
+			}
+			Statement preparedStatement1 = connect.createStatement();
+			preparedStatement1.executeQuery("SELECT * FROM `grade`,`info` WHERE `grade`.num=`info`.num");
+			ResultSet resultSet1 = preparedStatement1.getResultSet();
+			int i=0;
+			while(resultSet1.next()){
+				Grade item = new Grade();
+				item.setId(resultSet1.getString("id"));
+				item.setName(resultSet1.getString("name"));
+				item.setId1(resultSet1.getString("id1"));
+				item.setId2(resultSet1.getString("id2"));
+				item.setId3(resultSet1.getString("id3"));
+				item.setId4(resultSet1.getString("id4"));
+				item.setId5(resultSet1.getString("id5"));
+				item.setId6(resultSet1.getString("id6"));
+				item.setId7(resultSet1.getString("id7"));
+				item.setId8(resultSet1.getString("id8"));
+				item.setId9(resultSet1.getString("id9"));
+				int total = (resultSet1.getInt("id1")*percentage[0]+resultSet1.getInt("id2")*percentage[1]+resultSet1.getInt("id3")*percentage[2]+resultSet1.getInt("id4")*percentage[3]+resultSet1.getInt("id5")*percentage[4]+resultSet1.getInt("id6")*percentage[5]+resultSet1.getInt("id7")*percentage[6]+resultSet1.getInt("id8")*percentage[7]+resultSet1.getInt("id9")*percentage[8])/100;
+				item.setTotal(total+"");
+				preparedStatement.executeUpdate("UPDATE `grade` SET total='"+total+"' WHERE num="+resultSet1.getString("num")+"");
+				list.add(i, item);
+				i++;
+			}
+			return list;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			throw e;

@@ -256,6 +256,43 @@ public class Gradelist extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}else if(type.equals("finish")){
+			Database db = new Database();
+			String sid = request.getParameter("s");
+			String t = request.getParameter("t");
+			try {
+				db.connect();
+				response.setContentType("text/html");
+				PrintWriter out = response.getWriter();
+				if(db.finish(sid,t)){
+					out.println("OK");
+				}else{
+					out.println("Error");
+				}
+				db.close();      
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}else if(type.equals("unfinish")){
+			Database db = new Database();
+			String sid = request.getParameter("s");
+			String t = request.getParameter("t");
+			String name = request.getParameter("n");
+			try {
+				db.connect();
+				response.setContentType("text/html");
+				PrintWriter out = response.getWriter();
+				if(db.unfinish(sid,t,name)){
+					out.println("OK");
+				}else{
+					out.println("Error");
+				}
+				db.close();      
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 
