@@ -372,6 +372,18 @@ public class Database {
 		}
 	}
 	
+	public boolean updateGrade(String sid, String id, String value) throws Exception {
+		// TODO Auto-generated method stub
+		try {
+			preparedStatement = connect.createStatement();
+			preparedStatement.executeUpdate("UPDATE `grade` SET "+id+"='"+value+"' WHERE num="+sid+"");
+			return true;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			throw e;
+		}
+	}
+	
 	public void close() {
 		try {
 			if (resultSet != null) {

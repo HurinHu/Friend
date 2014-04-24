@@ -134,6 +134,31 @@ $(document).ready(function(){
 		$('div#loading').hide();
 	});
 	
+	$('button#submitgrade').click(function(){
+		var i;
+		var error=0;
+		for(i=0;i<$('input#inputnum').val();i++){
+			var id=$('input#input'+i).val();
+			var value=$('input#'+id).val();
+			if(value>100){
+				error=1;
+			}
+		}
+		if(error==0){
+			for(i=0;i<$('input#inputnum').val();i++){
+				var id=$('input#input'+i).val();
+				var value=$('input#'+id).val();
+				var sid=$('input#studentid').val();
+				$.get("gradelist",{type:"update",s:sid,i:id,v:value},function(data){
+					
+				});
+			}
+			alert("Update Successfully !");
+		}else{
+			alert("Input Error !");
+		}
+	});
+	
 	$('li#overview').trigger('click');
 });
 
@@ -181,6 +206,7 @@ function showdetail(id){
 
 function grade(id){
 	$('div#editmodal').empty();
+	var count=0;
 	$.getJSON("gradelist",{type:"grade",i:id,type1:$('input#type').val(),teacher:$('input#user').val()}, function(json) {
 		if(json!=null){
 			$.getJSON("gradelist",{type:"authority",teacher:$('input#type').val()}, function(json1) {
@@ -188,13 +214,16 @@ function grade(id){
 				if(json1!=null){
 					$.each(json,function(index,array){
 						$.each(json1,function(index,array1){
-							html="<h5 class='text-danger'>"+array1['title']+"</h5><input type=\"text\" id="+array1['title']+" class=\"form-control\" >";
+							count=count+1;
+							html="<h5 class='text-danger'>"+array1['title']+"</h5><input type=\"text\" id="+array1['name']+" class=\"form-control\" value="+array[array1['name']]+"><input type=\"hidden\" id=\"input"+(count-1)+"\" value="+array1['name']+" />";
 							$('div#editmodal').append(html);
 						});
 					});
+					$('div#editmodal').append("<input type=\"hidden\" id=\"inputnum\" value="+count+"><input type=\"hidden\" id=\"studentid\" value="+id+">");
 				}
 			});
 		}
 	});
+	
 	$('a#showedit').trigger('click');
 }

@@ -102,7 +102,6 @@ public class Gradelist extends HttpServlet {
 				db.close();      
 				String jsonString = JSONValue.toJSONString(l);
 				out.println(jsonString);
-				System.out.println(jsonString);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -219,11 +218,40 @@ public class Gradelist extends HttpServlet {
 					Map m = new HashMap();
 					m.put("name", "id"+item.getNum());
 					m.put("title", item.getTitle());
+					m.put("id1", item.getId1());
+					m.put("id2", item.getId2());
+					m.put("id3", item.getId3());
+					m.put("id4", item.getId4());
+					m.put("id5", item.getId5());
+					m.put("id6", item.getId6());
+					m.put("id7", item.getId7());
+					m.put("id8", item.getId8());
+					m.put("id9", item.getId9());
+					m.put("total", item.getTotal());
 					l.add(m);
 				}
 				db.close();      
 				String jsonString = JSONValue.toJSONString(l);
 				out.println(jsonString);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}else if(type.equals("update")){
+			Database db = new Database();
+			String sid = request.getParameter("s");
+			String id = request.getParameter("i");
+			String value = request.getParameter("v");
+			try {
+				db.connect();
+				response.setContentType("text/html");
+				PrintWriter out = response.getWriter();
+				if(db.updateGrade(sid,id,value)){
+					out.println("OK");
+				}else{
+					out.println("Error");
+				}
+				db.close();      
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
