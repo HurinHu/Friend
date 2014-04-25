@@ -15,6 +15,7 @@ public class Grade {
 	private String id8;
 	private String id9;
 	private String total;
+	private String letter;
 	
 	public boolean setNum(int num){
 		this.num = num;
@@ -140,5 +141,14 @@ public class Grade {
 	
 	public String getTotal(){
 		return total;
+	}
+	
+	public boolean setLetter(String letter){
+		this.letter = letter;
+		return true;
+	}
+	
+	public String getLetter(){
+		return letter;
 	}
 }

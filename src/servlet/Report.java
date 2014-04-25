@@ -79,6 +79,30 @@ public class Report extends HttpServlet {
 					m.put("id8", item.getId8());
 					m.put("id9", item.getId9());
 					m.put("total", item.getTotal());
+					m.put("letter", item.getLetter());
+					l.add(m);
+				}
+				db.close();      
+				String jsonString = JSONValue.toJSONString(l);
+				out.println(jsonString);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}else if(type.equals("percentage")){
+			Database db = new Database();
+			try {
+				db.connect();
+				List<AssessmentItem> list = db.assessment();
+				AssessmentItem item = new AssessmentItem();
+				int i;
+				response.setContentType("text/html");
+				PrintWriter out = response.getWriter();
+				List  l = new LinkedList();
+				for(i=0;i<9;i++){
+					item = list.get(i);
+					Map m = new HashMap();
+					m.put( "percentage", item.getPercentage(i+1));
 					l.add(m);
 				}
 				db.close();      

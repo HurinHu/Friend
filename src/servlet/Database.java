@@ -1,12 +1,19 @@
 package servlet;
 
+import java.io.File;
 import java.sql.Array;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+
+import jxl.Workbook;
+import jxl.write.Label;
+import jxl.write.WritableSheet;
+import jxl.write.WritableWorkbook;
 
 public class Database {
 	private Connection connect = null;
@@ -490,29 +497,159 @@ public class Database {
 			while(resultSet.next()){
 				percentage[j++] = resultSet.getInt("percentage");
 			}
+			Statement preparedStatement3 = connect.createStatement();
+			preparedStatement3.executeQuery("SELECT COUNT(*) AS num FROM `grade`,`info` WHERE `grade`.num=`info`.num ORDER BY total DESC");
+			ResultSet resultSet3 = preparedStatement3.getResultSet();
+			int row=0;
+			while(resultSet3.next()){
+				row=resultSet3.getInt("num");
+			}
+			int i=0;
 			Statement preparedStatement1 = connect.createStatement();
 			preparedStatement1.executeQuery("SELECT * FROM `grade`,`info` WHERE `grade`.num=`info`.num");
 			ResultSet resultSet1 = preparedStatement1.getResultSet();
-			int i=0;
+			int letter1=(int) (row*0.05);
+			int letter2=(int) (row*0.15);
+			int letter3=(int) (row*0.20);
+			int letter4=(int) (row*0.30);
+			int letter5=(int) (row*0.45);
+			int letter6=(int) (row*0.60);
+			int letter7=(int) (row*0.70);
+			int letter8=(int) (row*0.90);
+			int letter9=(int) (row*1.00);
 			while(resultSet1.next()){
+				float total = (resultSet1.getFloat("id1")*percentage[0]+resultSet1.getFloat("id2")*percentage[1]+resultSet1.getFloat("id3")*percentage[2]+resultSet1.getFloat("id4")*percentage[3]+resultSet1.getFloat("id5")*percentage[4]+resultSet1.getFloat("id6")*percentage[5]+resultSet1.getFloat("id7")*percentage[6]+resultSet1.getFloat("id8")*percentage[7]+resultSet1.getFloat("id9")*percentage[8])/100;
+				DecimalFormat   fnum  =   new  DecimalFormat("##0.00"); 
+				String num=fnum.format(total);
+				preparedStatement.executeUpdate("UPDATE `grade` SET total='"+num+"' WHERE num="+resultSet1.getString("num")+"");
+			}
+			Statement preparedStatement2 = connect.createStatement();
+			preparedStatement2.executeQuery("SELECT * FROM `grade`,`info` WHERE `grade`.num=`info`.num ORDER BY total DESC");
+			ResultSet resultSet2 = preparedStatement2.getResultSet();
+			while(resultSet2.next()){
 				Grade item = new Grade();
-				item.setId(resultSet1.getString("id"));
-				item.setName(resultSet1.getString("name"));
-				item.setId1(resultSet1.getString("id1"));
-				item.setId2(resultSet1.getString("id2"));
-				item.setId3(resultSet1.getString("id3"));
-				item.setId4(resultSet1.getString("id4"));
-				item.setId5(resultSet1.getString("id5"));
-				item.setId6(resultSet1.getString("id6"));
-				item.setId7(resultSet1.getString("id7"));
-				item.setId8(resultSet1.getString("id8"));
-				item.setId9(resultSet1.getString("id9"));
-				int total = (resultSet1.getInt("id1")*percentage[0]+resultSet1.getInt("id2")*percentage[1]+resultSet1.getInt("id3")*percentage[2]+resultSet1.getInt("id4")*percentage[3]+resultSet1.getInt("id5")*percentage[4]+resultSet1.getInt("id6")*percentage[5]+resultSet1.getInt("id7")*percentage[6]+resultSet1.getInt("id8")*percentage[7]+resultSet1.getInt("id9")*percentage[8])/100;
-				item.setTotal(total+"");
-				preparedStatement.executeUpdate("UPDATE `grade` SET total='"+total+"' WHERE num="+resultSet1.getString("num")+"");
+				item.setId(resultSet2.getString("id"));
+				item.setName(resultSet2.getString("name"));
+				item.setId1(resultSet2.getString("id1"));
+				item.setId2(resultSet2.getString("id2"));
+				item.setId3(resultSet2.getString("id3"));
+				item.setId4(resultSet2.getString("id4"));
+				item.setId5(resultSet2.getString("id5"));
+				item.setId6(resultSet2.getString("id6"));
+				item.setId7(resultSet2.getString("id7"));
+				item.setId8(resultSet2.getString("id8"));
+				item.setId9(resultSet2.getString("id9"));
+				item.setTotal(resultSet2.getString("total"));
+				String letter="";
+				if(i+1<=letter1){
+					letter="A";
+				}else if(i+1>letter1&&i+1<=letter2){
+					letter="A-";
+				}else if(i+1>letter2&&i+1<=letter3){
+					letter="B+";
+				}else if(i+1>letter3&&i+1<=letter4){
+					letter="B";
+				}else if(i+1>letter4&&i+1<=letter5){
+					letter="B-";
+				}else if(i+1>letter5&&i+1<=letter6){
+					letter="C+";
+				}else if(i+1>letter6&&i+1<=letter7){
+					letter="C";
+				}else if(i+1>letter7&&i+1<=letter8){
+					letter="C-";
+				}else if(i+1>letter8&&i+1<=letter9){
+					letter="D";
+				}
+				item.setLetter(letter);
+				preparedStatement.executeUpdate("UPDATE `grade` SET letter='"+letter+"' WHERE num="+resultSet2.getString("num")+"");
 				list.add(i, item);
 				i++;
 			}
+			preparedStatement2 = connect.createStatement();
+			preparedStatement2.executeQuery("SELECT title FROM `rule` ORDER BY id ASC");
+			resultSet2 = preparedStatement2.getResultSet();
+			String[] rule = new String[9];
+			i=0;
+			while(resultSet2.next()){
+				rule[i++]=resultSet2.getString("title");
+			}
+			WritableWorkbook wb=null;
+			File file=new File("/Volumes/Macintosh HD/workspace/Friend/WebContent/import.xls");
+			if(!file.exists()){
+				file.createNewFile();
+			}else{
+				file.delete();
+				file.createNewFile();
+			}
+			try {
+				   wb=Workbook.createWorkbook(file);
+				   if (wb != null) {
+					   WritableSheet sheets=wb.createSheet("sheet1", 0);
+				     Label label1=new Label(0, 0, "#");
+				     sheets.addCell(label1);
+				     Label label2=new Label(1, 0, "Student ID");
+				     sheets.addCell(label2);
+				     Label label3=new Label(2, 0, "Name");
+				     sheets.addCell(label3);
+				     Label label4=new Label(3, 0, rule[0]);
+				     sheets.addCell(label4);
+				     Label label5=new Label(4, 0, rule[1]);
+				     sheets.addCell(label5);
+				     Label label6=new Label(5, 0, rule[2]);
+				     sheets.addCell(label6);
+				     Label label7=new Label(6, 0, rule[3]);
+				     sheets.addCell(label7);
+				     Label label8=new Label(7, 0, rule[4]);
+				     sheets.addCell(label8);
+				     Label label9=new Label(8, 0, rule[5]);
+				     sheets.addCell(label9);
+				     Label label10=new Label(9, 0, rule[6]);
+				     sheets.addCell(label10);
+				     Label label11=new Label(10, 0, rule[7]);
+				     sheets.addCell(label11);
+				     Label label12=new Label(11, 0, rule[8]);
+				     sheets.addCell(label12);
+				     Label label13=new Label(12, 0, "Grade");
+				     sheets.addCell(label13);
+				     Label label14=new Label(13, 0, "Letter");
+				     sheets.addCell(label14);
+				     for (int l = 1; l <= row; l++) {
+				      Label labela=new Label(0, l, l+"");
+				      sheets.addCell(labela);
+				      Label labelb=new Label(1, l, list.get(l-1).getId());
+				      sheets.addCell(labelb);
+				      Label labelc=new Label(2, l, list.get(l-1).getName());
+				      sheets.addCell(labelc);
+				      Label labeld=new Label(3, l, list.get(l-1).getId1());
+				      sheets.addCell(labeld);
+				      Label labele=new Label(4, l, list.get(l-1).getId2());
+				      sheets.addCell(labele);
+				      Label labelf=new Label(5, l, list.get(l-1).getId3());
+				      sheets.addCell(labelf);
+				      Label labelg=new Label(6, l, list.get(l-1).getId4());
+				      sheets.addCell(labelg);
+				      Label labelh=new Label(7, l, list.get(l-1).getId5());
+				      sheets.addCell(labelh);
+				      Label labeli=new Label(8, l, list.get(l-1).getId6());
+				      sheets.addCell(labeli);
+				      Label labelj=new Label(9, l, list.get(l-1).getId7());
+				      sheets.addCell(labelj);
+				      Label labelk=new Label(10, l, list.get(l-1).getId8());
+				      sheets.addCell(labelk);
+				      Label labell=new Label(11, l, list.get(l-1).getId9());
+				      sheets.addCell(labell);
+				      Label labelm=new Label(12, l, list.get(l-1).getTotal());
+				      sheets.addCell(labelm);
+				      Label labeln=new Label(13, l, list.get(l-1).getLetter());
+				      sheets.addCell(labeln);
+				     }
+				   }
+				  } catch (Exception e) {
+				   System.out.println(e.getMessage());
+				  } finally {
+				   wb.write();
+				   wb.close();
+				  }
 			return list;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

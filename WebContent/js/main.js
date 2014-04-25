@@ -15,7 +15,7 @@ $(document).ready(function(){
 			$.post("change",{status:"check",pw:$('input#oldpw').val()},function(data){
 				if(data.indexOf("OK")!=-1){
 					$.post("change",{status:"change",pw:$('input#newpw').val()},function(data){
-						if(data==="OK"){
+						if(data.indexOf("OK")!=-1){
 							alert("Password Update ! ");
 							$('#close').trigger('click');
 							$('#error').hide();
@@ -141,7 +141,7 @@ $(document).ready(function(){
 		for(i=0;i<$('input#inputnum').val();i++){
 			var id=$('input#input'+i).val();
 			var value=$('input#'+id).val();
-			if(value>100){
+			if(value>4&&value<0){
 				error=1;
 			}
 		}

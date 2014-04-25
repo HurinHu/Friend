@@ -1,5 +1,6 @@
 eclipse.preferences.version=1
 encoding//WebContent/js/coordinator.js=UTF-8
 encoding//WebContent/js/main.js=UTF-8
+encoding//src/servlet/Database.java=UTF-8
 encoding//src/servlet/Import.java=UTF-8
 encoding//src/servlet/TimeTable.java=UTF-8

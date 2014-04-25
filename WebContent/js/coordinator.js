@@ -15,7 +15,7 @@ $(document).ready(function(){
 			$.post("change",{status:"check",pw:$('input#oldpw').val()},function(data){
 				if(data.indexOf("OK")!=-1){
 					$.post("change",{status:"change",pw:$('input#newpw').val()},function(data){
-						if(data==="OK"){
+						if(data.indexOf("OK")!=-1){
 							alert("Password Update ! ");
 							$('#close').trigger('click');
 							$('#error').hide();
@@ -125,17 +125,27 @@ $(document).ready(function(){
 			}else{
 				$.get("ajax",{action:"report"},function(data){
 					$('div#main').html(data);
-					$.getJSON("report",{type:"get"},function(json){
+					$.getJSON("report",{type:"percentage"},function(json){
 						if(json!=null){
-							var i=1;
-							var html="";
+							var html="<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>";
 							$.each(json,function(index,array){ 
-								html="<tr><td>"+i+"</td><td>"+array['id']+"</td><td>"+array['name']+"</td><td>"+array['id1']+"</td><td>"+array['id2']+"</td><td>"+array['id3']+"</td><td>"+array['id4']+"</td><td>"+array['id5']+"</td><td>"+array['id6']+"</td><td>"+array['id7']+"</td><td>"+array['id8']+"</td><td>"+array['id9']+"</td><td>"+array['total']+"</td></tr>";
-								i++;
-								$('tbody#reportlist').append(html);
+								html+="<td>"+array['percentage']+"%</td>";
+							});
+							$('tbody#reportlist').append(html);
+							$('tbody#reportlist').append("<td></td></tr>");
+							$.getJSON("report",{type:"get"},function(json){
+								if(json!=null){
+									var i=1;
+									var html="";
+									$.each(json,function(index,array){ 
+										html="<tr><td>"+i+"</td><td>"+array['id']+"</td><td>"+array['name']+"</td><td>"+array['id1']+"</td><td>"+array['id2']+"</td><td>"+array['id3']+"</td><td>"+array['id4']+"</td><td>"+array['id5']+"</td><td>"+array['id6']+"</td><td>"+array['id7']+"</td><td>"+array['id8']+"</td><td>"+array['id9']+"</td><td>"+array['total']+"</td><td>"+array['letter']+"</td></tr>";
+										i++;
+										$('tbody#reportlist').append(html);
+									});
+								}
 							});
 						}
-					});					
+					});			
 				});
 			}
 		});
