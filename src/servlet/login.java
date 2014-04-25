@@ -32,6 +32,11 @@ public class login extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
+		/**
+		 * login and logout method
+		 */
+		
 		String status = request.getParameter("status");
 		if(status.equals("logout")){
 			PrintWriter out = response.getWriter();

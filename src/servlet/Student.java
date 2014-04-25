@@ -13,6 +13,10 @@ public class Student {
 	private String time;
 	private String room;
 	
+	/**
+	 * Set methods for student
+	 */
+	
 	public boolean setNum(int num){
 		this.num = num;
 		return true;

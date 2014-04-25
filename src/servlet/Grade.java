@@ -17,6 +17,10 @@ public class Grade {
 	private String total;
 	private String letter;
 	
+	/**
+	 * Set methods for grade
+	 */
+	
 	public boolean setNum(int num){
 		this.num = num;
 		return true;

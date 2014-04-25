@@ -1,3 +1,11 @@
+<!-- 
+                                                                                      
+ __  |   |        __  o  __  |__  _|_       __   ___    __  ___   __        ___   __| 
+(__( |_, |_,     |  ' | (__| |  )  |_,     |  ' (__/_ __)  (__/_ |  ' (__| (__/_ (__| 
+                         __/                                                          
+ 
+-->
+ 
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <!DOCTYPE html>
@@ -6,8 +14,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="http://www.iceloof.com">
+    <meta name="author" content="Hurin">
 
     <title>Final Year Project Coordination System</title>
 
@@ -155,3 +163,5 @@
     <script src="js/docs.min.js"></script>
   </body>
 </html>
+
+<!-- Code by Hurin, April 25, 2014 -->

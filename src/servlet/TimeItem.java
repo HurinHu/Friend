@@ -9,6 +9,10 @@ public class TimeItem {
 	private String time;
 	private String room;
 	
+	/**
+	 * Set methods for timetable item
+	 */
+	
 	public boolean setName(String Name){
 		this.Name = Name;
 		return true;

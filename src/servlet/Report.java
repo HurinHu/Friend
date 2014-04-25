@@ -37,6 +37,11 @@ public class Report extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
+		/**
+		 * Check finish first, and then give report and file
+		 */
+		
 		String type = request.getParameter("type");
 		if(type.equals("check")){
 			Database db = new Database();

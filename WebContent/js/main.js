@@ -1,5 +1,9 @@
 $(document).ready(function(){
 	
+	/*
+	  Set button action
+	 */
+	
 	$('button#changepw').click(function(){
 		$('div#changeform').hide();
 		$('div#loading1').show();
@@ -234,6 +238,10 @@ function inner(time){
     }
 }
 
+/*
+  Set student detail from json
+ */
+
 function showdetail(id){
 	$.getJSON('studentlist',{type:"student",num:id}, function(json) {
 		if(json!=null){
@@ -246,6 +254,10 @@ function showdetail(id){
 	});
 	$('a#showstudent').trigger('click');
 }
+
+/*
+  Get and display grade from json
+ */
 
 function grade(id){
 	$('div#editmodal').empty();
@@ -267,6 +279,5 @@ function grade(id){
 			});
 		}
 	});
-	
 	$('a#showedit').trigger('click');
 }

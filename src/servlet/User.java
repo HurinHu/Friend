@@ -28,6 +28,11 @@ public class User extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
+		/**
+		 * Get user list for coordinator
+		 */
+		
 		String status = request.getParameter("status");
 		if(status.equals("get")){
 			Database db = new Database();

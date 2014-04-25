@@ -37,6 +37,11 @@ public class changepw extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
+		/**
+		 * Check old password first, and then update password
+		 */
+		
 		String status = request.getParameter("status");
 		if(status.contains("check")){
 			String pw = request.getParameter("pw");

@@ -42,6 +42,11 @@ public class Import extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
+		/**
+		 * Delete table
+		 */
+		
 		Database db = new Database();
 		try{
 			db.connect();
@@ -62,6 +67,11 @@ public class Import extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
+		/**
+		 * Save file and read into database, and delete file
+		 */
+		
 		request.setCharacterEncoding("UTF-8");  
         DiskFileItemFactory factory = new DiskFileItemFactory();  
         ServletFileUpload upload = new ServletFileUpload(factory);  

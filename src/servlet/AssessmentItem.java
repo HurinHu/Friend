@@ -8,6 +8,10 @@ public class AssessmentItem {
 	private String observer;
 	private String examiner;
 	
+	/**
+	 * Set methods for assessment
+	 */
+	
 	public boolean setName(String name,int id){
 		this.name = name;
 		this.id = id;

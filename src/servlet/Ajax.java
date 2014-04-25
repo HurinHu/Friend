@@ -29,6 +29,11 @@ public class Ajax extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
+		/**
+		 * Ajax loading code
+		 */
+		
 		String action = request.getParameter("action");
 		PrintWriter out = response.getWriter();
 		if(action.equals("rulesetting")){

@@ -35,6 +35,11 @@ public class Gradelist extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
+		/**
+		 * return data base on different type of teacher
+		 */
+		
 		String type = request.getParameter("type");
 		if(type.equals("supervisor")){
 			Database db = new Database();

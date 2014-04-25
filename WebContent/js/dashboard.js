@@ -1,4 +1,9 @@
 $(document).ready(function(){
+	
+	/*
+	  Set button action
+	 */
+	
 	$('button#menu').click(function(){
 		if($('div.sidebar').is(':visible')){
 			$('div.sidebar').hide();
@@ -17,6 +22,10 @@ $(document).ready(function(){
   				setTimeout("$('ul.dropdownmenu').hide()",5000);
 	});
 });
+
+/*
+  Set print action
+ */
 
 function printDiv(divName) {
      var printContents = document.getElementById(divName).innerHTML;

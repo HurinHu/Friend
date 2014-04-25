@@ -20,7 +20,13 @@ public class Database {
 	private Statement statement = null;
 	private Statement preparedStatement = null;
 	private ResultSet resultSet = null;
+	
 	public void connect() throws Exception{
+		
+		/**
+		 * Establish a database connection
+		 */
+		
 		try{
 			Class.forName("org.gjt.mm.mysql.Driver");
 			String db = "FYPC";
@@ -32,6 +38,11 @@ public class Database {
 	}
 	
 	public List<String> login(String user, String password) throws Exception{
+		
+		/**
+		 * Check user and password
+		 */
+		
 		List<String> login = new ArrayList<String>();
 		try {
 			preparedStatement = connect.createStatement();
@@ -53,6 +64,11 @@ public class Database {
 	}
 	
 	public List<AssessmentItem> assessment() throws Exception{
+		
+		/**
+		 * Read assessment from database
+		 */
+		
 		List<AssessmentItem> list = new ArrayList<AssessmentItem>();
 		try {
 			preparedStatement = connect.createStatement();
@@ -77,6 +93,11 @@ public class Database {
 	}
 	
 	public List<UserItem> user() throws Exception{
+		
+		/**
+		 * Read user list from database
+		 */
+		
 		List<UserItem> list = new ArrayList<UserItem>();
 		try {
 			preparedStatement = connect.createStatement();
@@ -100,6 +121,11 @@ public class Database {
 	}
 	
 	public boolean checkpw(String usr, String pw) throws Exception{
+		
+		/**
+		 * Compare password
+		 */
+		
 		try {
 			preparedStatement = connect.createStatement();
 			preparedStatement.executeQuery("SELECT * FROM `user` WHERE user='"+usr+"' AND password='"+pw+"'");
@@ -116,6 +142,11 @@ public class Database {
 	}
 	
 	public boolean changepw(String usr, String pw) throws Exception{
+		
+		/**
+		 * Update password
+		 */
+		
 		try {
 			preparedStatement = connect.createStatement();
 			int result = preparedStatement.executeUpdate("UPDATE `user` SET password='"+pw+"' WHERE user='"+usr+"'");
@@ -132,6 +163,11 @@ public class Database {
 	
 	public boolean updaterule(String[] name, String[] percentage,String[] supervisor, String[] observer, String[] examiner) throws Exception {
 		// TODO Auto-generated method stub
+		
+		/**
+		 * Update rule
+		 */
+		
 		try {
 			preparedStatement = connect.createStatement();
 			int i;
@@ -147,6 +183,11 @@ public class Database {
 	
 	public boolean userupdate(String user, String pw, String email, String id) throws Exception {
 		// TODO Auto-generated method stub
+		
+		/**
+		 * Update user information
+		 */
+		
 		try {
 			preparedStatement = connect.createStatement();
 			preparedStatement.executeUpdate("UPDATE `user` SET user='"+user+"', password='"+pw+"', email='"+email+"' WHERE id="+id+"");
@@ -159,6 +200,11 @@ public class Database {
 	
 	public boolean userdelete(String id) throws Exception {
 		// TODO Auto-generated method stub
+		
+		/**
+		 * Delete user from database
+		 */
+		
 		try {
 			preparedStatement = connect.createStatement();
 			preparedStatement.executeUpdate("DELETE FROM `user` WHERE id="+id+"");
@@ -171,6 +217,11 @@ public class Database {
 	
 	public boolean useradd(String user, String pw, String email) throws Exception {
 		// TODO Auto-generated method stub
+		
+		/**
+		 * Add user to database
+		 */
+		
 		try {
 			preparedStatement = connect.createStatement();
 			preparedStatement.executeUpdate("INSERT INTO `user` VALUES (null,'"+user+"','"+pw+"','"+email+"','teacher')");
@@ -182,6 +233,11 @@ public class Database {
 	}
 	
 	public boolean deleteimport() throws Exception{
+		
+		/**
+		 * Empty info and grade table in database
+		 */
+		
 		try {
 			preparedStatement = connect.createStatement();
 			preparedStatement.executeUpdate("TRUNCATE TABLE `info`");
@@ -194,6 +250,11 @@ public class Database {
 	}
 	
 	public boolean insertimport(String num, String id, String name, String tel, String project, String supervisor, String observer, String examiner, String date, String time, String room) throws Exception{
+		
+		/**
+		 * Insert import file to database
+		 */
+		
 		try {
 			preparedStatement = connect.createStatement();
 			preparedStatement.executeUpdate("INSERT INTO `info` VALUES ('"+num+"','"+id+"','"+name+"','"+tel+"','"+project+"','"+supervisor+"','"+observer+"','"+examiner+"','"+date+"','"+time+"','"+room+"')");
@@ -206,6 +267,11 @@ public class Database {
 	}
 	
 	public List<TimeItem> getTimetable(String teacher) throws Exception{
+		
+		/**
+		 * Get teacher's timetable from database
+		 */
+		
 		List<TimeItem> list = new ArrayList<TimeItem>();
 		try {
 			preparedStatement = connect.createStatement();
@@ -233,6 +299,11 @@ public class Database {
 	
 	public List<Student> studentlist(String type, String teacher) throws Exception {
 		// TODO Auto-generated method stub
+		
+		/**
+		 * Get student list for teacher
+		 */
+		
 		List<Student> list = new ArrayList<Student>();
 		try {
 			preparedStatement = connect.createStatement();
@@ -264,6 +335,11 @@ public class Database {
 	
 	public List<Student> studentdetail(String num) throws Exception {
 		// TODO Auto-generated method stub
+		
+		/**
+		 * Get student detail
+		 */
+		
 		List<Student> list = new ArrayList<Student>();
 		try {
 			preparedStatement = connect.createStatement();
@@ -295,6 +371,11 @@ public class Database {
 	
 	public List<Grade> gradelist(String type, String teacher) throws Exception {
 		// TODO Auto-generated method stub
+		
+		/**
+		 * Get grade list from database
+		 */
+		
 		List<Grade> list = new ArrayList<Grade>();
 		try {
 			preparedStatement = connect.createStatement();
@@ -327,6 +408,11 @@ public class Database {
 	
 	public List<Grade> gradeauthority(String type) throws Exception {
 		// TODO Auto-generated method stub
+		
+		/**
+		 * Get assessment authority
+		 */
+		
 		List<Grade> list = new ArrayList<Grade>();
 		try {
 			preparedStatement = connect.createStatement();
@@ -349,6 +435,11 @@ public class Database {
 	
 	public List<Grade> getGrade(String id, String teacher, String type) throws Exception {
 		// TODO Auto-generated method stub
+		
+		/**
+		 * Get grade from database
+		 */
+		
 		List<Grade> list = new ArrayList<Grade>();
 		try {
 			preparedStatement = connect.createStatement();
@@ -381,6 +472,11 @@ public class Database {
 	
 	public boolean updateGrade(String sid, String id, String value) throws Exception {
 		// TODO Auto-generated method stub
+		
+		/**
+		 * Update grade to database
+		 */
+		
 		try {
 			preparedStatement = connect.createStatement();
 			int v = Integer.parseInt(value);
@@ -394,6 +490,11 @@ public class Database {
 	
 	public boolean check() throws Exception {
 		// TODO Auto-generated method stub
+		
+		/**
+		 * Check all teacher finish or not, if not, get teacher list and send email
+		 */
+		
 		try {
 			List<Teacher> list = new ArrayList<Teacher>();
 			preparedStatement = connect.createStatement();
@@ -463,6 +564,11 @@ public class Database {
 	
 	public boolean finish(String sid, String t) throws Exception {
 		// TODO Auto-generated method stub
+		
+		/**
+		 * Update database if teacher finish grading one student
+		 */
+		
 		try {
 			preparedStatement = connect.createStatement();
 			preparedStatement.executeUpdate("UPDATE `grade` SET "+t+"='' WHERE num="+sid+"");
@@ -475,6 +581,11 @@ public class Database {
 	
 	public boolean unfinish(String sid, String t, String name) throws Exception {
 		// TODO Auto-generated method stub
+		
+		/**
+		 * Update database if teacher does not finish grading one student
+		 */
+		
 		try {
 			preparedStatement = connect.createStatement();
 			preparedStatement.executeUpdate("UPDATE `grade` SET "+t+"='"+name+"' WHERE num="+sid+"");
@@ -487,6 +598,11 @@ public class Database {
 	
 	public List<Grade> getReport() throws Exception {
 		// TODO Auto-generated method stub
+		
+		/**
+		 * Get report from database, calculate the total score and give a letter, write these into a excel file
+		 */
+		
 		List<Grade> list = new ArrayList<Grade>();
 		try {
 			preparedStatement = connect.createStatement();
@@ -658,6 +774,11 @@ public class Database {
 	}
 	
 	public void close() {
+		
+		/**
+		 * Close database connection
+		 */
+		
 		try {
 			if (resultSet != null) {
 				resultSet.close();

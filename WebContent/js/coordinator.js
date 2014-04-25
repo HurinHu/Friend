@@ -1,5 +1,9 @@
 $(document).ready(function(){
 	
+	/*
+	  Set button action
+	 */
+	
 	$('button#changepw').click(function(){
 		$('div#changeform').hide();
 		$('div#loading1').show();

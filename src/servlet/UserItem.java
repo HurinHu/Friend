@@ -6,6 +6,10 @@ public class UserItem {
 	private String password = null;
 	private String email = null;
 	
+	/**
+	 * Set methods for user
+	 */
+	
 	public boolean setId(String id){
 		this.id = id;
 		return true;

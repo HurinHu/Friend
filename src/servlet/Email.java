@@ -9,6 +9,11 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 public class Email {
+	
+	/**
+	 * set email function
+	 */
+	
 	public void send(String to){
 	      String from = "admin@iceloof.com";
 	      String host = "localhost";

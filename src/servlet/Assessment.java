@@ -24,6 +24,11 @@ public class Assessment extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
+		/**
+		 * Get assessment for rule setting
+		 */
+		
 		Database db = new Database();
 		try {
 			db.connect();
@@ -57,6 +62,11 @@ public class Assessment extends HttpServlet {
 	 */
 	protected void  doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
+		/**
+		 * Set assessment for rule setting
+		 */
+		
 		String[] name = new String[9];
 		String[] percentage = new String[9];
 		String[] supervisor = new String[9];
