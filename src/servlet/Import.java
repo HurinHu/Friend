@@ -83,9 +83,6 @@ public class Import extends HttpServlet {
                     
                 } else {  
                     if (item.getName() != null && !item.getName().equals("")) {  
-                        //System.out.println("size:" + item.getSize());  
-                        //System.out.println("type:" + item.getContentType());  
-                        //System.out.println("name:" + item.getName());  
                         File tempFile = new File(item.getName());   
                         File f1 = new File(sc.getRealPath("/") + savePath);
                         if (!f1.exists()) {
