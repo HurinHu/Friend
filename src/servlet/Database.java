@@ -479,8 +479,12 @@ public class Database {
 		
 		try {
 			preparedStatement = connect.createStatement();
-			int v = Integer.parseInt(value);
-			preparedStatement.executeUpdate("UPDATE `grade` SET "+id+"='"+v+"' WHERE num="+sid+"");
+			if(value.equals("")){
+				preparedStatement.executeUpdate("UPDATE `grade` SET "+id+"='"+value+"' WHERE num="+sid+"");
+			}else{
+				float v = Float.parseFloat(value);
+				preparedStatement.executeUpdate("UPDATE `grade` SET "+id+"='"+v+"' WHERE num="+sid+"");
+			}
 			return true;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

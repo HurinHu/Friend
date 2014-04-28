@@ -15,7 +15,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="http://www.iceloof.com">
-    <meta name="author" content="Hurin">or" content="">
+    <meta name="author" content="Hurin">
 
     <title>Final Year Project Coordination System - Login</title>
 
