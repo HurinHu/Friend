@@ -58,7 +58,6 @@ public class Import extends HttpServlet {
 	}
 
 	public void init(ServletConfig config) {  
-	        // 在web.xml中设置的一个初始化参数  
 	        savePath = config.getInitParameter("savePath");  
 	        sc = config.getServletContext();  
 	}  
