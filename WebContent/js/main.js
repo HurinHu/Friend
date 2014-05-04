@@ -145,7 +145,7 @@ $(document).ready(function(){
 		for(i=0;i<$('input#inputnum').val();i++){
 			var id=$('input#input'+i).val();
 			var value=$('input#'+id).val();
-			if(parseInt(value)>4&&parseInt(value)<0){
+			if(parseFloat(value)>4.0||parseFloat(value)<0.0){
 				error=1;
 			}
 		}

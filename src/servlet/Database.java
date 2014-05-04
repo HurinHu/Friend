@@ -258,7 +258,7 @@ public class Database {
 		try {
 			preparedStatement = connect.createStatement();
 			preparedStatement.executeUpdate("INSERT INTO `info` VALUES ('"+num+"','"+id+"','"+name+"','"+tel+"','"+project+"','"+supervisor+"','"+observer+"','"+examiner+"','"+date+"','"+time+"','"+room+"')");
-			preparedStatement.executeUpdate("INSERT INTO `grade` VALUES ('"+num+"','"+supervisor+"','"+observer+"','"+examiner+"', '', '', '', '', '', '', '', '', '', '')");
+			preparedStatement.executeUpdate("INSERT INTO `grade` VALUES ('"+num+"','"+supervisor+"','"+observer+"','"+examiner+"', '', '', '', '', '', '', '', '', '', '', '')");
 			return true;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
