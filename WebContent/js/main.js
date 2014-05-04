@@ -103,7 +103,7 @@ $(document).ready(function(){
 				if(json!=null){
 					var html="";
 					$.each(json,function(index,array){ 
-						html="<tr class=\"success\"><td>"+array['name']+"</td><td><button type=\"button\" class=\"btn btn-primary btn-sm pull-right\" onclick=\"showdetail("+array['num']+")\">Detail</button></td></tr>";
+						html="<tr class=\"success\"><td>"+array['name']+"</td><td></td></tr>";
 						$('tbody#Observation').append(html);
 					});
 				}
@@ -112,7 +112,7 @@ $(document).ready(function(){
 				if(json!=null){
 					var html="";
 					$.each(json,function(index,array){ 
-						html="<tr class=\"success\"><td>"+array['name']+"</td><td><button type=\"button\" class=\"btn btn-primary btn-sm pull-right\" onclick=\"showdetail("+array['num']+")\">Detail</button></td></tr>";
+						html="<tr class=\"success\"><td>"+array['name']+"</td><td></td></tr>";
 						$('tbody#Examination').append(html);
 					});
 				}
@@ -145,7 +145,7 @@ $(document).ready(function(){
 		for(i=0;i<$('input#inputnum').val();i++){
 			var id=$('input#input'+i).val();
 			var value=$('input#'+id).val();
-			if(value>4&&value<0){
+			if(parseInt(value)>4&&parseInt(value)<0){
 				error=1;
 			}
 		}
